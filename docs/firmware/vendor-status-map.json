@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "target": "njcuk.fitting.ad1204",
+  "firmware": "2.1.2_0073",
+  "raw_sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "evidence": "offline static reply stores, independently checked against raw Thumb",
+  "hardware_validated": false,
+  "user_reply_observations": {
+    "record": "diagnostics-sample-0073.json",
+    "selectors": [1, 2, 6],
+    "reply_lengths_agree": true,
+    "limits": "User-supplied app report; no instrumented trace, per-field timestamps, physical calibration, MTU or reconnect validation."
+  },
+  "service_uuid16": "af00",
+  "write_uuid16": "af07",
+  "notify_uuid16": "af08",
+  "common_side_effect": "Pauses MIOT cache updates until disconnect; reconnect before ordinary telemetry resumes.",
+  "offset_origin": "Start of complete notification, fe at zero",
+  "read_selectors": [
+    {
+      "name": "controller_versions",
+      "request_hex": "fedcba01f1000101",
+      "reply_length": 21,
+      "reply_prefix_hex": "fedcba01f101",
+      "minimum_att_mtu": 24,
+      "handler": "0041cae4",
+      "fields": [
+        {"offset": 6, "size": 2, "encoding": "u16le", "name": "local_firmware_revision"},
+        {"offset": 8, "size": 2, "encoding": "u16le", "name": "boot_record_image_crc", "note": "Not a bootloader version."},
+        {"offset": 10, "size": 2, "encoding": "u16le", "name": "sc2021_software_version"},
+        {"offset": 12, "size": 2, "encoding": "u16le", "name": "c1_controller_version_word_1", "note": "Exact role unresolved; may be stale on I2C failure."},
+        {"offset": 14, "size": 2, "encoding": "u16le", "name": "c1_controller_version_word_2"},
+        {"offset": 16, "size": 2, "encoding": "u16le", "name": "c2_controller_version_word_1"},
+        {"offset": 18, "size": 2, "encoding": "u16le", "name": "c2_controller_version_word_2"}
+      ]
+    },
+    {
+      "name": "sensors_and_control_state",
+      "request_hex": "fedcba01f1000102",
+      "reply_length": 18,
+      "reply_prefix_hex": "fedcba01f1020a",
+      "minimum_att_mtu": 23,
+      "handler": "0041c910",
+      "additional_activity": "ADC diagnostic conversion; remaining values predominantly cached.",
+      "fields": [
+        {"offset": 7, "size": 1, "encoding": "u8", "name": "ntc2_shell_input", "units": "firmware temperature units, Celsius inferred", "source_ram": "2000ceb0"},
+        {"offset": 8, "size": 1, "encoding": "u8", "name": "adc_diagnostic_byte", "units": "unresolved", "note": "Conversion uses factory/default reference, then keeps low byte. Original fixtures show 0x24 aliases full results 292/36/-220/-476. Celsius/full result unconfirmed. See sensor-confirmation-and-monitoring.md."},
+        {"offset": 9, "size": 2, "encoding": "u16le", "name": "vac_adc_proxy_mv", "source_ram": "2000ec40", "note": "ADC sensed proxy; not direct mains AC volts."},
+        {"offset": 11, "size": 1, "encoding": "u8", "name": "ac_dc_rail_state", "observed_enum": {"0": "9 V rail", "1": "16 V rail", "2": "22 V rail"}},
+        {"offset": 12, "size": 1, "encoding": "u8", "name": "pfc_high_state"},
+        {"offset": 13, "size": 1, "encoding": "u8", "name": "ntc1_protection_input", "units": "firmware temperature units, Celsius inferred", "source_ram": "2000ce7d"},
+        {"offset": 14, "size": 1, "encoding": "u8", "name": "unbound_and_default_settings"},
+        {"offset": 15, "size": 1, "encoding": "u8", "name": "hardware_global_version_flag"},
+        {"offset": 16, "size": 1, "encoding": "u8", "name": "holiday_startup_artwork", "meaning": "Persistent cosmetic boot-graphic flag, values 0/1; see display-and-hidden-features.md"}
+      ]
+    },
+    {
+      "name": "unbound_default_check",
+      "request_hex": "fedcba01f1000103",
+      "reply_length": 9,
+      "reply_prefix_hex": "fedcba01f10301",
+      "minimum_att_mtu": 23,
+      "handler": "0041c988",
+      "fields": [{"offset": 7, "size": 1, "encoding": "u8", "name": "unbound_and_default_settings"}]
+    },
+    {
+      "name": "port_cap_and_protocol_state",
+      "request_hex": "fedcba01f1000106",
+      "reply_length": 18,
+      "reply_prefix_hex": "fedcba01f1060a",
+      "minimum_att_mtu": 23,
+      "handler": "0041c9b4",
+      "additional_activity": "Reads/logs SC2021 registers0c/0d/0e; those register values are not returned.",
+      "fields": [
+        {"offset": 7, "size": 1, "encoding": "u8", "name": "c1_assigned_cap_code"},
+        {"offset": 8, "size": 1, "encoding": "u8", "name": "c2_assigned_cap_code"},
+        {"offset": 9, "size": 1, "encoding": "u8", "name": "c3_assigned_cap_code"},
+        {"offset": 10, "size": 1, "encoding": "u8", "name": "a_assigned_cap_code"},
+        {"offset": 11, "size": 1, "encoding": "u8", "name": "c1_husb362_protocol"},
+        {"offset": 12, "size": 1, "encoding": "u8", "name": "c1_husb362_protocol_detail"},
+        {"offset": 13, "size": 1, "encoding": "u8", "name": "c2_husb362_protocol"},
+        {"offset": 14, "size": 1, "encoding": "u8", "name": "c2_husb362_protocol_detail"},
+        {"offset": 15, "size": 1, "encoding": "u8", "name": "c3_sc2021_native_protocol"},
+        {"offset": 16, "size": 1, "encoding": "u8", "name": "a_sc2021_native_protocol"}
+      ]
+    },
+    {
+      "name": "combined_status",
+      "request_hex": "fedcba01f1000200",
+      "reply_length": 24,
+      "reply_prefix_hex": "fedcba01f10010",
+      "minimum_att_mtu": 27,
+      "handler": "0041c888",
+      "fields": [
+        {"offset": 7, "size": 2, "encoding": "bytes", "name": "fixed_0005", "hex": "0005", "meaning": "unresolved"},
+        {"offset": 9, "size": 2, "encoding": "u16le", "name": "local_firmware_revision"},
+        {"offset": 11, "size": 2, "encoding": "u16le", "name": "sc2021_software_version"},
+        {"offset": 13, "size": 1, "encoding": "u8", "name": "ntc2_shell_input"},
+        {"offset": 14, "size": 1, "encoding": "u8", "name": "adc_diagnostic_byte"},
+        {"offset": 15, "size": 2, "encoding": "u16le", "name": "vac_adc_proxy_mv"},
+        {"offset": 17, "size": 1, "encoding": "u8", "name": "ac_dc_rail_state"},
+        {"offset": 18, "size": 1, "encoding": "u8", "name": "pfc_high_state"},
+        {"offset": 19, "size": 2, "encoding": "u16le", "name": "boot_record_image_crc"},
+        {"offset": 21, "size": 2, "encoding": "bytes", "name": "fixed_0405", "hex": "0405", "meaning": "unresolved"}
+      ]
+    }
+  ],
+  "required_terminator_hex": "ef",
+  "not_returned": ["phone temperature", "per-port measured volts/current/watts", "SC2021 close reason", "SC2021 OTP protection-active flag", "bootloader software version", "exact phone model"],
+  "publication": "Evidence offsets and descriptions only; excludes firmware, vendor decompilation, credentials and tokens."
+}

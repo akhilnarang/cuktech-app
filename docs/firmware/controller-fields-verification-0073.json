@@ -1,0 +1,64 @@
+{
+  "husb": {
+    "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+    "cases": 48,
+    "instruction_steps": 3666,
+    "mode_callbacks": 498,
+    "distinct_executed_instructions": 104,
+    "all_expected_results_match": true,
+    "stub_calls": {
+      "aggregate_status_update": 36,
+      "high_power_reconcile": 24,
+      "high_power_setter": 42,
+      "memcpy_bytecopy_18": 48,
+      "mode_getter": 108,
+      "protocol_cache_update": 36,
+      "protocol_state_transition": 12,
+      "read82_scripted_success": 48,
+      "read83_scripted_failure": 12,
+      "read83_scripted_success": 12,
+      "reconcile": 48,
+      "sensor_lookup": 36,
+      "telemetry_accumulator": 36
+    },
+    "entry": "0040a718",
+    "stop": "0040a85a before final POP PC",
+    "scope": "48 original-worker fixtures: both ports, destination word 5499/5500/5501, mode getter 0/1, status bit0 active/inactive, and scripted command0x83 success/failure. In inactive fixtures the 0x83 result profile is unused. Measured voltage differs from destination and deliberately crosses the threshold independently. Asserts high-power callback arguments, measured telemetry, status, protocol-cache callback, ordering, 18-byte raw cache and surrounding context/guards. Scripted 0x82 helper writes exactly 16 data bytes plus a synthesized checksum; copied byte17 retains controlled stack poison. Stops before final POP PC. No physical bus or charger accessed.",
+    "excluded_calls": [
+      "0040a5f4 reconcile",
+      "00414c80 command0x82 helper including physical bus/checksum verification",
+      "00403154 memcpy replaced by exact bytecopy",
+      "00417d60 mode getter",
+      "00408ecc high-power reconciliation",
+      "00409dd8 high-power setter body and downstream PFC/allocation",
+      "00417ba4 UI mode getter",
+      "00414dac command0x83 helper including physical bus/checksum verification",
+      "00409c1c protocol state transition body",
+      "00414c70 sensor lookup body",
+      "0040a57c aggregate updater body",
+      "00405d88 telemetry accumulator body",
+      "00405e5c protocol-cache updater body"
+    ],
+    "unexercised_paths": [
+      "0x82 failure",
+      "factory-display status bit9",
+      "revision metadata write",
+      "recovery status mask0x84/config bit1",
+      "protocol-zero/nonzero debounce threshold transitions",
+      "memcmp stable-protocol path",
+      "real controller responses, units/calibration, timers, PFC, actual negotiation"
+    ],
+    "emulator_workaround": "Instance-local fixed-Thumb setISAMode callback replacement; rejects ARM transitions and retains original instruction p-code/firmware bytes. External calls execute the original BL then return to actual LR via scripted entry stubs."
+  },
+  "sc2021": {
+    "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+    "cases": 4744,
+    "instruction_steps": 329500,
+    "distinct_executed_instructions": 162,
+    "mode_callbacks": 31888,
+    "all_expected_results_match": true,
+    "entry": "004153ac after bus/CRC accepted C3-active branch",
+    "stop": "0041542a before register-20 read/disabled-status overwrite",
+    "scope": "Original V/I/activity stores, protocol-byte gate, cache/protection handling and replay request selection; original 00405534/004055ce helper bodies execute. Both ports synthetic active. All pairs of protocol0..15 plus invalid16/255, both PD-load states; all256 protection bytes on each port across selected accepted/rejected pairs. Logger/delay and bus-write bodies are stubbed to return to actual LR; replay arguments checked. Bus writes always return synthetic success, with no peripheral execution. CRC acceptance is assumed at entry, not verified. Complete polling schedule, bus/register20 state, subsequent status overwrite, recovery, electrical fault meanings and physical charger effects excluded. Instance-local fixed-Thumb setISAMode workaround changes no original instructions/p-code."
+  }
+}

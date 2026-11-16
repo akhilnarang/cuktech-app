@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "firmware": "njcuk.fitting.ad1204 2.1.2_0073",
+  "raw_sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "translator": "00408fd0",
+  "protocol_table": "00408ff8",
+  "detail_table": "00408fe8",
+  "scope": "Original table bytes and translator stores; names are separate evidence. No hardware validation.",
+  "detail_units": "Unconfirmed for SC2021; values are exact bytes, not automatically watt labels",
+  "native_codes": [
+    {"native": 0, "exposed_protocol": 0, "detail": 0, "name": null},
+    {"native": 1, "exposed_protocol": 2, "detail": 10, "name": null},
+    {"native": 2, "exposed_protocol": 1, "detail": 10, "name": null},
+    {"native": 3, "exposed_protocol": 1, "detail": 10, "name": null},
+    {"native": 4, "exposed_protocol": 1, "detail": 10, "name": null},
+    {"native": 5, "exposed_protocol": 1, "detail": 10, "name": null},
+    {"native": 6, "exposed_protocol": 3, "detail": 10, "name": null},
+    {"native": 7, "exposed_protocol": 3, "detail": 18, "name": null},
+    {"native": 8, "exposed_protocol": 3, "detail": 18, "name": null},
+    {"native": 9, "exposed_protocol": 1, "detail": 10, "name": null},
+    {"native": 10, "exposed_protocol": 3, "detail": 22, "name": null},
+    {"native": 11, "exposed_protocol": 4, "detail": 15, "name": null},
+    {"native": 12, "exposed_protocol": 5, "detail": 15, "name": null},
+    {"native": 13, "exposed_protocol": 6, "detail": 22, "name": null},
+    {"native": 14, "exposed_protocol": 7, "detail": 30, "name": "PD", "name_scope": "C3 reporting path", "evidence": "004153c8 logs C3 PD Load; 004153d2 sets flag=1; 00415498 selects native 0x0e from flag; 00408fd0 translates to exposed 7. Fixed/PPS unresolved."},
+    {"native": 15, "exposed_protocol": 10, "detail": 44, "name": null}
+  ],
+  "out_of_range": {"native_minimum": 16, "exposed_protocol": 1, "detail": 10, "note": "Translator fallback, not a new protocol enum; acquisition also range-checks values."}
+}

@@ -1,0 +1,422 @@
+{
+  "schema_version": 1,
+  "firmware": "2.1.2_0073",
+  "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "evidence_kind": "Local Ghidra static and original-instruction emulation with synthetic RAM; no physical charger observations",
+  "evidence": {
+    "audit": {
+      "local_directory": "artifacts/firmware/allocation-audit-20261016-complete",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "exact_function_count": 22,
+        "instruction_records": 2396,
+        "tables": [
+          {
+            "address": "2000c2b6",
+            "hex": "0b0b8070600b0b807060"
+          },
+          {
+            "address": "00407ab8",
+            "hex": "0a0a3030070b8060070780300a0a3070"
+          },
+          {
+            "address": "00408248",
+            "hex": "070a30300a0a30300a0160600b0160600a0b60600a0a80300a0a3070"
+          },
+          {
+            "address": "00473e68",
+            "hex": "b004b00484030000b004b00484030000"
+          }
+        ],
+        "scope": "Static scene-dispatch/cap-clamp TBB repairs and selected allocation/helper bodies. Shared register/flag helpers require original instruction review. RAM table comes from reconstructed startup data. No hardware execution."
+      },
+      "file_sha256": {
+        "analysis.json": "886ac8df73929532ff9c595c3f61621de026da90301ec5a6446030ee5359791f",
+        "functions.jsonl": "c77b7a69b80349c53ddf433de5d2270492d3c1bad31c783966926e52b6086172",
+        "instructions.jsonl": "34945466897ed533f9a26d58ce8c6eca1691dc17cf37b469d8b5fae50fe5e289"
+      }
+    },
+    "allocation": {
+      "local_directory": "artifacts/firmware/allocation-verification-20261016-final",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "cases": 1058,
+        "independent_expected_rows": 226,
+        "instruction_steps": 324790,
+        "distinct_executed_instructions": 1877,
+        "mode_callbacks": 31214,
+        "all_checks_passed": true,
+        "scope": "Original allocation dispatcher, scenes, shared register/flag helpers, first-insert comparator, code-to-power and current-cap getter. Synthetic occupied masks, host/power/native cache, AC selectors0/1/2, hardware0/1 and1200/900 budgets. Matrix outputs recorded; independently transcribed expected rows only for fixed normal scenes and selected AI boundaries/classes. Every dispatcher fixture independently checks its final clamp, disabled-port zeroing, remaining-budget store and output guards. Logger/delay bodies stubbed, hardware getter scripted, timer returns1; no peripheral/ROM/scheduler/manager/classifier execution, physical negotiation or ACK. Fixed-Thumb instance workaround changes no original bytes/p-code."
+      },
+      "file_sha256": {
+        "cases.jsonl": "7a0fb5f5d20e4789d10701a81c3aba57ad1cc3de4959e11bf715cc7b93e07d56",
+        "executed-instructions.jsonl": "55c1dd0e0621d78b7f56d319bc5a1429a3161105f213d558242122653b034e77",
+        "verification.json": "ad948127f46645f0c5dc64d572218e9c3c0ea48f34aa8ca2d685fa5036d9c5e3"
+      }
+    },
+    "load_classifier": {
+      "local_directory": "artifacts/firmware/allocation-load-verification-20261016",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "cases": 1218,
+        "instruction_steps": 101009,
+        "distinct_executed_instructions": 245,
+        "mode_callbacks": 9740,
+        "all_expected_results_match": true,
+        "entries": [
+          "00406b78",
+          "00406db4"
+        ],
+        "stops": [
+          "00406da2 before POP",
+          "00406e00 before POP",
+          "00406e22 before POP"
+        ],
+        "scope": "Original classifier and immediate revocation instructions on both ports. Synthetic host states, power hints, reduction classes1/2/3/5/8, brand0/Apple2, destination boundary9200/9201, peak19/20,current29/30 and load0/1/3. Full context and guards compared; only expected load bytes may change. Original BL executes before helper stubs. Scripted current power, peak, brand and logging; exact five-byte memcmp semantics. Does not execute telemetry scaling/history production, VID classification, scheduler, scene allocation, peripheral or bus code. Immediate helper returns4 after selecting a candidate even when rewritten load value is unchanged. Instance-local fixed-Thumb callback workaround changes no original instruction/p-code."
+      },
+      "file_sha256": {
+        "cases.jsonl": "bc2a4b6cbd939627ab911dd49758f6936fe7ebaa492e48740dca56e877c73981",
+        "executed-instructions.jsonl": "42cd977c810b16c29e60c0b7a1775f4fed4a0173bcad77a9283e6800a2f70a54",
+        "verification.json": "43e1d8b3070798bca10ab5ed8af370bd9582052060e104777f2119b6f4e2fa26"
+      }
+    }
+  },
+  "normal_fixed_scene_rows": {
+    "conditions": {
+      "ac_selector": 2,
+      "hardware_flag": 0,
+      "direct_scene_entry": true,
+      "active_count": "popcount(occupied_mask)",
+      "nonzero_power_hint_per_occupied_port": 100,
+      "cap_order": [
+        "C1",
+        "C2",
+        "C3",
+        "A"
+      ],
+      "mask_bits": [
+        "C1",
+        "C2",
+        "C3",
+        "A"
+      ],
+      "scope": "Normal scene functions before allocator gates/final clamp/manager C2 startup gate. Idle ports retain reserve caps."
+    },
+    "rows": {
+      "Apple_Hybrid": [
+        {
+          "occupied_mask": 1,
+          "caps_hex": "0b 03 80 60"
+        },
+        {
+          "occupied_mask": 2,
+          "caps_hex": "07 0b 80 60"
+        },
+        {
+          "occupied_mask": 3,
+          "caps_hex": "07 03 60 60"
+        },
+        {
+          "occupied_mask": 4,
+          "caps_hex": "07 07 80 30"
+        },
+        {
+          "occupied_mask": 5,
+          "caps_hex": "07 01 80 30"
+        },
+        {
+          "occupied_mask": 6,
+          "caps_hex": "07 07 80 30"
+        },
+        {
+          "occupied_mask": 7,
+          "caps_hex": "07 01 60 60"
+        },
+        {
+          "occupied_mask": 8,
+          "caps_hex": "0a 0a 30 70"
+        },
+        {
+          "occupied_mask": 9,
+          "caps_hex": "0a 01 30 60"
+        },
+        {
+          "occupied_mask": 10,
+          "caps_hex": "07 0a 30 60"
+        },
+        {
+          "occupied_mask": 11,
+          "caps_hex": "07 01 60 60"
+        },
+        {
+          "occupied_mask": 12,
+          "caps_hex": "0a 0a 30 30"
+        },
+        {
+          "occupied_mask": 13,
+          "caps_hex": "0a 01 30 30"
+        },
+        {
+          "occupied_mask": 14,
+          "caps_hex": "0a 0a 30 30"
+        },
+        {
+          "occupied_mask": 15,
+          "caps_hex": "07 01 30 30"
+        }
+      ],
+      "Single_Extreme": [
+        {
+          "occupied_mask": 1,
+          "caps_hex": "0b 01 60 60"
+        },
+        {
+          "occupied_mask": 2,
+          "caps_hex": "0a 0b 60 60"
+        },
+        {
+          "occupied_mask": 3,
+          "caps_hex": "0a 01 60 60"
+        },
+        {
+          "occupied_mask": 4,
+          "caps_hex": "0a 0a 80 30"
+        },
+        {
+          "occupied_mask": 5,
+          "caps_hex": "0a 01 60 30"
+        },
+        {
+          "occupied_mask": 6,
+          "caps_hex": "07 0a 60 30"
+        },
+        {
+          "occupied_mask": 7,
+          "caps_hex": "07 01 60 60"
+        },
+        {
+          "occupied_mask": 8,
+          "caps_hex": "0a 0a 30 70"
+        },
+        {
+          "occupied_mask": 9,
+          "caps_hex": "0a 01 30 60"
+        },
+        {
+          "occupied_mask": 10,
+          "caps_hex": "07 0a 30 60"
+        },
+        {
+          "occupied_mask": 11,
+          "caps_hex": "07 01 60 60"
+        },
+        {
+          "occupied_mask": 12,
+          "caps_hex": "0a 0a 30 30"
+        },
+        {
+          "occupied_mask": 13,
+          "caps_hex": "0a 01 30 30"
+        },
+        {
+          "occupied_mask": 14,
+          "caps_hex": "07 0a 30 30"
+        },
+        {
+          "occupied_mask": 15,
+          "caps_hex": "07 01 30 30"
+        }
+      ],
+      "Balance": [
+        {
+          "occupied_mask": 1,
+          "caps_hex": "0b 04 80 60"
+        },
+        {
+          "occupied_mask": 2,
+          "caps_hex": "04 0b 80 60"
+        },
+        {
+          "occupied_mask": 3,
+          "caps_hex": "04 04 60 60"
+        },
+        {
+          "occupied_mask": 4,
+          "caps_hex": "07 07 80 30"
+        },
+        {
+          "occupied_mask": 5,
+          "caps_hex": "07 03 80 30"
+        },
+        {
+          "occupied_mask": 6,
+          "caps_hex": "03 07 80 30"
+        },
+        {
+          "occupied_mask": 7,
+          "caps_hex": "03 03 60 30"
+        },
+        {
+          "occupied_mask": 8,
+          "caps_hex": "0a 0a 30 70"
+        },
+        {
+          "occupied_mask": 9,
+          "caps_hex": "0a 03 30 60"
+        },
+        {
+          "occupied_mask": 10,
+          "caps_hex": "03 0a 30 60"
+        },
+        {
+          "occupied_mask": 11,
+          "caps_hex": "03 03 30 60"
+        },
+        {
+          "occupied_mask": 12,
+          "caps_hex": "0a 0a 30 30"
+        },
+        {
+          "occupied_mask": 13,
+          "caps_hex": "0a 03 30 30"
+        },
+        {
+          "occupied_mask": 14,
+          "caps_hex": "03 0a 30 30"
+        },
+        {
+          "occupied_mask": 15,
+          "caps_hex": "03 03 30 30"
+        }
+      ]
+    }
+  },
+  "normal_two_c_dispatcher_examples": [
+    {
+      "scene": 2,
+      "ac_selector": 1,
+      "caps": [
+        7,
+        4,
+        96,
+        96
+      ]
+    },
+    {
+      "scene": 2,
+      "ac_selector": 2,
+      "caps": [
+        7,
+        3,
+        96,
+        96
+      ]
+    },
+    {
+      "scene": 3,
+      "ac_selector": 1,
+      "caps": [
+        10,
+        1,
+        96,
+        96
+      ]
+    },
+    {
+      "scene": 3,
+      "ac_selector": 2,
+      "caps": [
+        10,
+        1,
+        96,
+        96
+      ]
+    },
+    {
+      "scene": 4,
+      "ac_selector": 1,
+      "caps": [
+        5,
+        5,
+        96,
+        96
+      ]
+    },
+    {
+      "scene": 4,
+      "ac_selector": 2,
+      "caps": [
+        4,
+        4,
+        96,
+        96
+      ]
+    }
+  ],
+  "reported_pair_possible_example": {
+    "entry": "00406e30",
+    "scene": 1,
+    "occupied_mask": 3,
+    "ac_selector": 1,
+    "hardware_flag": 0,
+    "budget_deciwatts": 1200,
+    "port_mode": 0,
+    "enabled_mask": 15,
+    "power_hints_deciwatts": [
+      270,
+      600
+    ],
+    "reduction_classes": [
+      1,
+      3
+    ],
+    "native_enums": [
+      7,
+      8
+    ],
+    "destination_words": [
+      9000,
+      8500
+    ],
+    "input_load_classes": [
+      0,
+      0
+    ],
+    "first_insert_return": 0,
+    "scene_entry": "00407104",
+    "before_final_clamp": [
+      4,
+      7,
+      96,
+      96
+    ],
+    "caps": [
+      4,
+      7,
+      96,
+      96
+    ],
+    "output_load_classes": [
+      0,
+      0
+    ],
+    "independent_expected_row": true,
+    "instruction_steps": 421
+  },
+  "excluded_initial_runs": [
+    "allocation-audit-20261016: missing cap lookup function boundary",
+    "allocation-verification-20261016: incorrect synthetic startup row",
+    "allocation-verification-20261016-corrected: completed narrower933-case run, superseded",
+    "allocation-verification-20261016-complete: final reported-example timestamp expectation reversed",
+    "allocation-verification-20261016-verified: cases finished but instruction export lacked a shared-helper listing"
+  ],
+  "post_export_checks": {
+    "normal_AI_load_class_writes_independently_checked": 24,
+    "original_instruction_records_byte_matched": {
+      "audit": 2396,
+      "allocation": 1877,
+      "load_classifier": 245
+    },
+    "case_counts_and_step_sums_match_metadata": true
+  }
+}

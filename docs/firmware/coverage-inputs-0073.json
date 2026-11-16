@@ -1,0 +1,96 @@
+{
+  "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "image": "../../artifacts/firmware/njcuk.fitting.ad1204-2.1.2_0073-1.bin",
+  "flash_base": "00403000",
+  "analysis_metadata": "../../artifacts/firmware/ghidra-final/analysis.json",
+  "inventory": "../../artifacts/firmware/ghidra-final/functions.jsonl",
+  "focused": [
+    {"functions": "../../artifacts/firmware/protocol-followup-20261014.jsonl"},
+    {
+      "functions": "../../artifacts/firmware/display-followup-20261014/functions.jsonl",
+      "metadata": "../../artifacts/firmware/display-followup-20261014/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/display-gpio-followup-20261014/functions.jsonl",
+      "metadata": "../../artifacts/firmware/display-gpio-followup-20261014/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/coverage-gaps-followup-20261014/functions.jsonl",
+      "metadata": "../../artifacts/firmware/coverage-gaps-followup-20261014/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/protocol-factory-followup-20261014-verified/functions.jsonl",
+      "metadata": "../../artifacts/firmware/protocol-factory-followup-20261014-verified/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/thermal-cache-followup-20261014-complete/functions.jsonl",
+      "metadata": "../../artifacts/firmware/thermal-cache-followup-20261014-complete/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/sensor-calibration-followup-20261014/functions.jsonl",
+      "metadata": "../../artifacts/firmware/sensor-calibration-followup-20261014/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/controller-paths-20261015/functions.jsonl",
+      "metadata": "../../artifacts/firmware/controller-paths-20261015/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/status-settings-20261015-complete/functions.jsonl",
+      "metadata": "../../artifacts/firmware/status-settings-20261015-complete/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/protocol-command-audit-20261015/functions.jsonl",
+      "metadata": "../../artifacts/firmware/protocol-command-audit-20261015/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/secondary-controller-audit-20261016-complete/functions.jsonl",
+      "metadata": "../../artifacts/firmware/secondary-controller-audit-20261016-complete/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/controller-fields-audit-20261016-complete/functions.jsonl",
+      "metadata": "../../artifacts/firmware/controller-fields-audit-20261016-complete/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/control-settling-audit-20261016-complete/functions.jsonl",
+      "metadata": "../../artifacts/firmware/control-settling-audit-20261016-complete/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/allocation-audit-20261016-complete/functions.jsonl",
+      "metadata": "../../artifacts/firmware/allocation-audit-20261016-complete/analysis.json"
+    },
+    {
+      "functions": "../../artifacts/firmware/allocation-transitions-audit-20261016/functions.jsonl",
+      "metadata": "../../artifacts/firmware/allocation-transitions-audit-20261016/analysis.json"
+    }
+  ],
+  "instructions": [
+    "../../artifacts/firmware/display-followup-20261014/instructions.jsonl",
+    "../../artifacts/firmware/display-gpio-followup-20261014/instructions.jsonl",
+    "../../artifacts/firmware/coverage-gaps-followup-20261014/instructions.jsonl",
+    "../../artifacts/firmware/protocol-factory-followup-20261014-verified/instructions.jsonl",
+    "../../artifacts/firmware/thermal-cache-followup-20261014-complete/instructions.jsonl",
+    "../../artifacts/firmware/adc-conversion-verification-20261014-verified/executed-instructions.jsonl",
+    "../../artifacts/firmware/sensor-calibration-followup-20261014/instructions.jsonl",
+    "../../artifacts/firmware/controller-paths-20261015/instructions.jsonl",
+    "../../artifacts/firmware/color-bitmaps-verification-20261015/executed-instructions.jsonl",
+    "../../artifacts/firmware/status-settings-20261015-complete/instructions.jsonl",
+    "../../artifacts/firmware/status-timeout-verification-20261015-initialized/executed-instructions.jsonl",
+    "../../artifacts/firmware/protocol-command-audit-20261015/instructions.jsonl",
+    "../../artifacts/firmware/protocol-switch-verification-20261015/executed-instructions.jsonl",
+    "../../artifacts/firmware/secondary-controller-audit-20261016-complete/instructions.jsonl",
+    "../../artifacts/firmware/sc-limit-cache-verification-20261016-fixed-thumb/executed-instructions.jsonl",
+    "../../artifacts/firmware/controller-fields-audit-20261016-complete/instructions.jsonl",
+    "../../artifacts/firmware/sc-status-gate-verification-20261016/executed-instructions.jsonl",
+    "../../artifacts/firmware/husb-status-fields-verification-20261016/executed-instructions.jsonl",
+    "../../artifacts/firmware/control-settling-audit-20261016-complete/instructions.jsonl",
+    "../../artifacts/firmware/husb-control-byte-verification-20261016-corrected/executed-instructions.jsonl",
+    "../../artifacts/firmware/husb-settling-verification-20261016/executed-instructions.jsonl",
+    "../../artifacts/firmware/allocation-audit-20261016-complete/instructions.jsonl",
+    "../../artifacts/firmware/allocation-verification-20261016-final/executed-instructions.jsonl",
+    "../../artifacts/firmware/allocation-load-verification-20261016/executed-instructions.jsonl",
+    "../../artifacts/firmware/allocation-transitions-audit-20261016/instructions.jsonl",
+    "../../artifacts/firmware/c2-startup-verification-20261016/executed-instructions.jsonl",
+    "../../artifacts/firmware/allocation-manager-verification-20261016/executed-instructions.jsonl",
+    "../../artifacts/firmware/thermal-stage-dirty-verification-20261016/executed-instructions.jsonl"
+  ]
+}

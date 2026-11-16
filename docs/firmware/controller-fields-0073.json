@@ -1,0 +1,100 @@
+{
+  "firmware_sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "scope": "Secondary-controller bus replies, not Bluetooth reply layouts. Static consumer evidence; no physical capture or calibrated values.",
+  "offset_units": "bytes from beginning of each bus response",
+  "husb362": {
+    "wire_write_addresses": [146, 148],
+    "read_checksum": "(2 * wire_write_address + 1 + command + sum(data)) & 255",
+    "version_80": {
+      "command": 128, "data_bytes": 6, "response_bytes": 7, "reader": "00414e9c",
+      "fields": [
+        {"offset": 0, "size": 2, "endian": "little", "name": "version word 0", "meaning": "unresolved; omitted from AF selector 1"},
+        {"offset": 2, "size": 2, "endian": "little", "name": "version word 1", "meaning": "returned by AF selector 1; exact role unresolved"},
+        {"offset": 4, "size": 2, "endian": "little", "name": "version word 2", "meaning": "returned by AF selector 1; exact role unresolved"},
+        {"offset": 6, "size": 1, "name": "checksum", "meaning": "integrity byte, not another version"}
+      ]
+    },
+    "configuration_81": {
+      "command": 129, "data_bytes": 4, "response_bytes": 5, "reader": "00414d04",
+      "fields": [
+        {"offset": 0, "size": 1, "name": "allocation / mPowerMode", "meaning": "controller allocation code, not an active protocol"},
+        {"offset": 1, "size": 1, "name": "disable/control bits", "disable_bits": {"miPPS": 0, "UFCS": 2, "PD": 3, "PPS": 4}, "other_bits": "bit 1 participates in recovery; bits 5..7 unresolved"},
+        {"offset": 2, "size": 1, "name": "HPower", "meaning": "desired byte follows AC selector == 2; byte-2-only difference does not trigger reconciliation"},
+        {"offset": 3, "size": 1, "name": "mUFCSCtrl", "meaning": "firmware-named control byte; desired default 0x3c; encoding and physical effect unresolved", "writer_boundary": "only recovered host writers initialize both desired bytes to0x3c; annotated refs/aligned base aliases do not close computed or ROM writes", "reconciliation": "isolated byte3 mismatch writes all four desired bytes; nonzero internal state requests settling reset; verified with synthetic replies"},
+        {"offset": 4, "size": 1, "name": "checksum"}
+      ]
+    },
+    "status_82": {
+      "command": 130, "data_bytes": 16, "response_bytes": 17, "reader": "00414c80",
+      "cache_bases": [536924032, 536924050],
+      "fields": [
+        {"offset": 0, "size": 2, "endian": "little", "name": "output voltage", "consumer": "0040a844 -> 00405d88"},
+        {"offset": 2, "size": 2, "endian": "little", "name": "output current", "consumer": "0040a842 -> 00405d88"},
+        {"offset": 4, "size": 2, "endian": "little", "name": "native status", "uses": {"bit0": "activity and protocol read gate", "bits2_or_7": "recovery subset", "bit9": "factory version display condition"}},
+        {"offset": 6, "size": 2, "endian": "little", "name": "internal sensor LUT input", "meaning": "temperature-like lookup/cache; physical units and BLE route unresolved"},
+        {"offset": 8, "size": 2, "endian": "little", "name": "unresolved word", "consumer": "copied, checksum-covered and printed by checksum-error log; no policy consumer identified"},
+        {"offset": 10, "size": 2, "endian": "little", "name": "mDestVoltage", "meaning": "firmware-named destination-voltage field; numeric scale consistent with mV but not calibrated or a decoded PDO/APDO", "policy_limit": "5500 high-power test and mapped PFC destination branch require hardware isGlobalVersion nonzero; flag zero uses activity for worker high-power callback"},
+        {"offset": 12, "size": 2, "endian": "little", "name": "unresolved word", "consumer": "copied, checksum-covered and printed by checksum-error log; no policy consumer identified"},
+        {"offset": 14, "size": 2, "endian": "little", "name": "unresolved word", "consumer": "copied, checksum-covered and printed by checksum-error log; no policy consumer identified"},
+        {"offset": 16, "size": 1, "name": "checksum"}
+      ],
+      "host_cache_extra": {"offset": 17, "size": 1, "origin": "18-byte copy includes a stack byte outside the 17-byte response", "device_field": false}
+    },
+    "host_settling": {
+      "state_address": "2000cf22 + port", "counter_address": "2000cf44 + port*2",
+      "state_numbers_are_protocols": false,
+      "change_check_when_state2": "all six cached/current bytes",
+      "settling_check_when_state1": "enum continuity only; other metadata changes do not reset the counter",
+      "counter_note": "same u16 handles zero detection>=20 and settling>=30; transition history matters; thresholds are not elapsed times",
+      "power_snapshot": "10 times prior cached detail plus prior enum, consumed before latest record commit",
+      "reduction_note": "mask0x7bf skips enum6; enums>10 also retain prior reduction class; does not name active wire protocols"
+    },
+    "protocol_83": {
+      "command": 131, "data_bytes": 5, "response_bytes": 6, "reader": "00414dac",
+      "cache_bases": [536922520, 536922526],
+      "fields": [
+        {"offset": 0, "size": 1, "name": "native protocol", "consumer": "reporting, classification and protocol settling"},
+        {"offset": 1, "size": 1, "name": "protocol power detail", "consumer": "PFC/rail policy and MIOT detail; universal units/contract interpretation not established"},
+        {"offset": 2, "size": 2, "endian": "little", "name": "controller-reported vendor ID", "consumer": "00406364 brand classifier"},
+        {"offset": 4, "size": 1, "name": "cable-current display value", "consumer": "00406792 -> 0041f77c -> 0040d700 formats %dA Cable", "limit": "vendor UI interpretation, not independent e-marker or current-capacity proof"},
+        {"offset": 5, "size": 1, "name": "checksum", "meaning": "included in six-byte cached record; not a sixth data field"}
+      ]
+    }
+  },
+  "sc2021": {
+    "wire_write_address": 66, "register": 16, "response_bytes": 17,
+    "crc": {"initial": 165, "polynomial": 49, "direction": "MSB first", "covered_offset": 0, "covered_bytes": 15, "stored_offset": 15, "zero_crc_rejected": true, "consumer": "004146bc"},
+    "normal_view": {
+      "reader": "004152dc", "raw_cache_base": "2000ce96",
+      "fields": [
+        {"offset": 0, "size": 1, "name": "C3 source status", "uses": {"bit0": "activity", "bit2": "PD-load latch"}, "other_bits": "no checked policy meaning established"},
+        {"offset": 1, "size": 1, "name": "A source status", "uses": {"bit0": "activity"}, "other_bits": "no checked policy meaning established"},
+        {"offset": 2, "size": 2, "endian": "big", "name": "C3 voltage"},
+        {"offset": 4, "size": 2, "endian": "big", "name": "C3 current"},
+        {"offset": 6, "size": 2, "endian": "big", "name": "A voltage"},
+        {"offset": 8, "size": 2, "endian": "big", "name": "A current"},
+        {"offset": 10, "size": 1, "name": "C3 native protocol", "limit": "both protocol bytes must be <= 15; PD-load latch can override C3 to 14"},
+        {"offset": 11, "size": 1, "name": "A native protocol"},
+        {"offset": 12, "size": 1, "name": "C3 protection source bits", "limit": "parsing/replay gated by both protocol enums; electrical fault names unresolved"},
+        {"offset": 13, "size": 1, "name": "A protection source bits", "limit": "parsing gated by both protocol enums; electrical fault names unresolved"},
+        {"offset": 14, "size": 1, "name": "unresolved CRC-covered byte", "consumer": "no mapped policy consumer"},
+        {"offset": 15, "size": 1, "name": "CRC"},
+        {"offset": 16, "size": 1, "name": "unresolved unchecked byte", "consumer": "not covered by CRC; no mapped policy consumer"}
+      ]
+    },
+    "ntc_version_view": {
+      "reader": "00415670",
+      "fields": [
+        {"offset": 0, "size": 8, "name": "unresolved CRC-covered prefix", "consumer": "no mapped field consumer"},
+        {"offset": 8, "size": 2, "endian": "big", "name": "SC software version"},
+        {"offset": 10, "size": 2, "endian": "big", "name": "NTC ADC input 0"},
+        {"offset": 12, "size": 2, "endian": "big", "name": "NTC ADC input 1"},
+        {"offset": 14, "size": 1, "name": "unresolved CRC-covered byte"},
+        {"offset": 15, "size": 1, "name": "CRC"},
+        {"offset": 16, "size": 1, "name": "unresolved unchecked byte"}
+      ]
+    },
+    "cached_getter": {"entry": "004158d8", "source": "2000ce90", "bytes": 6, "returns": 1, "limit": "first four bytes cache protocol/protection; final two are startup-zeroed with no producer identified; checked report callers use only first two protocol bytes; success is not freshness"}
+  },
+  "remaining_boundary": "Annotated references and selected original paths only; computed aliases, secondary firmware, missing ROM, calibration and real protocol negotiations remain outside this map."
+}

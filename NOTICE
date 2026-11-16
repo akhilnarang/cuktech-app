@@ -1,0 +1,48 @@
+cuktech-app
+Copyright 2026 The cuktech-app contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes software adapted from the following projects:
+
+ha-cuk-ble — https://github.com/zuyan9/ha-cuk-ble
+  Licensed under the Apache License, Version 2.0.
+  These parts are adapted from this project and modified:
+  - the Mi BLE login and crypto
+  - the MIOT framing and property encoding
+  - the AD1204U port telemetry decoding (app/.../proto/*)
+  - the Python Xiaomi cloud and BLE bind helpers (scripts/cuktech_pc/cloud.py,
+    crypto.py, blebind.py)
+
+Xiaomi-cloud-tokens-extractor — https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor
+  Copyright (c) 2020 Piotr Machowski. Licensed under the MIT License:
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+  The Xiaomi account login flow (scripts/cuktech_pc/cloud.py and
+  app/.../cloud/XiaomiCloudClient.kt) follows this project, through ha-cuk-ble.
+
+hass-xiaomi-miot — https://github.com/al-one/hass-xiaomi-miot
+  Licensed under the Apache License, Version 2.0.
+  The scripted two-factor flow by email or SMS uses the method of this project.
+
+Trademarks: CUKTECH, Xiaomi, Mi Home and Mijia are trademarks of their
+respective owners. This project is not affiliated with, endorsed by or
+sponsored by them. This project uses these names only to identify compatible
+hardware.

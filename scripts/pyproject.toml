@@ -1,0 +1,12 @@
+[project]
+name = "cuktech-pc"
+version = "0.1.0"
+description = "PC tool for the unofficial CUKTECH 10 Ultra (AD1204U) app: setup, token export and firmware tools"
+license = "Apache-2.0"
+requires-python = ">=3.14"
+dependencies = [
+    "bleak==3.0.2",
+    "cryptography==50.0.2",
+    "requests==2.34.2",
+    "rich==15.0.0",
+]

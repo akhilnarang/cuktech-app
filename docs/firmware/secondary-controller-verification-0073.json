@@ -1,0 +1,30 @@
+{
+  "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "cases": 5394,
+  "limit_cache_cases": 5358,
+  "retry_cases": 4,
+  "protocol_cache_cases": 32,
+  "instruction_steps": 155243,
+  "mode_callbacks": 29124,
+  "distinct_executed_instructions": 96,
+  "all_expected_results_match": true,
+  "stub_calls": {
+    "delay": 9963,
+    "limit_read_helper": 4575,
+    "limit_write_helper": 4590,
+    "logger": 9963,
+    "protocol_write_helper": 24,
+    "single_write": 9
+  },
+  "limit_entry": "0041631c",
+  "limit_stop": "00416374 before POP",
+  "retry_entry": "00415b3c",
+  "retry_stops": [
+    "00415b6e before failure POP",
+    "00415b74 before success POP"
+  ],
+  "protocol_entry": "004158e8",
+  "protocol_stop": "0041595c before POP",
+  "emulator_workaround": "Instance-local fixed-Thumb setISAMode callback replacement matching the existing status/timeout verifier. Rejects ARM transitions; original instruction p-code and firmware bytes unchanged. Initial run without this workaround failed at the first logger BL and does not count as a completed verification.",
+  "scope": "Original limit pack/cache control flow across all 16x16 nibble combinations and selected prior cache bytes; synthetic successful/failed write returns and matching/mismatched readback returns. Separate original retry-loop fixtures succeed on attempt 1/2/3 or exhaust all three. Original protocol-cache fixtures cover both ports, all UFCS/SCP combinations and four prior bytes: changed requests receive a synthetic exhausted-write failure, then an identical invocation must return success without writing. Cases already matching the desired cache skip both writes. Calls execute the original BL; external logger/delay/I2C entry points are stubbed by returning to actual LR without modifying original bytes. Stops before POP PC. Synthetic SRAM only; physical bus, controller firmware, negotiation, electrical limits, protection replay and actual faults excluded. Stub return values are test inputs, not observed hardware failures."
+}

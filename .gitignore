@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+.test-scratch/
+# Android / Gradle (app/.gitignore covers the rest)
+build/
+.gradle/
+.kotlin/
+local.properties
+# never commit signing material or tokens
+*.keystore
+*.jks
+*.token
+.private/
+# local RE outputs (firmware, APKs, decompiler exports): never commit
+/artifacts/

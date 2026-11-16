@@ -1,0 +1,77 @@
+{
+  "firmware_sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "functions_sha256": "eb3415d1a9b8f19f5709bf9c79306244b2674266947724a01e417790e12c9822",
+  "constant_tables": [
+    {
+      "name": "SHA-256 K words",
+      "offset": 139676,
+      "length": 256,
+      "sha256": "74ef7306e7452d6859b6463ce496b8df30925f69e1b2969e1f3f34bbc9c6af04",
+      "entire_table_matches": true
+    },
+    {
+      "name": "AES S-box",
+      "offset": 140176,
+      "length": 256,
+      "sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "entire_table_matches": true
+    }
+  ],
+  "host_interval": {
+    "start": 304,
+    "stop_exclusive": 139148,
+    "outside_body_bytes": 24952,
+    "largest_gap": 860,
+    "gaps_at_least_256": [
+      {
+        "offset": 16662,
+        "size": 860
+      },
+      {
+        "offset": 17688,
+        "size": 468
+      },
+      {
+        "offset": 18272,
+        "size": 508
+      },
+      {
+        "offset": 20428,
+        "size": 330
+      },
+      {
+        "offset": 29738,
+        "size": 338
+      },
+      {
+        "offset": 39522,
+        "size": 810
+      },
+      {
+        "offset": 54026,
+        "size": 322
+      },
+      {
+        "offset": 110924,
+        "size": 580
+      },
+      {
+        "offset": 124816,
+        "size": 316
+      },
+      {
+        "offset": 130458,
+        "size": 266
+      },
+      {
+        "offset": 138730,
+        "size": 418
+      }
+    ]
+  },
+  "limitations": [
+    "Exact generated-table identity classifies only the returned byte ranges.",
+    "Automated function bodies can be incomplete or include data; gaps are not proven executable/image boundaries.",
+    "No secondary controller image, protocol capability or flashing route is established."
+  ]
+}

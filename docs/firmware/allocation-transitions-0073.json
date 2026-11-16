@@ -1,0 +1,1348 @@
+{
+  "schema_version": 1,
+  "firmware": "2.1.2_0073",
+  "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+  "evidence_kind": "Local Ghidra static and original-instruction execution with synthetic RAM; no physical charger observation",
+  "evidence": {
+    "audit": {
+      "local_directory": "artifacts/firmware/allocation-transitions-audit-20261016",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "exact_function_count": 14,
+        "instruction_records": 572,
+        "context_gate_timestamp_literals": [
+          {
+            "literal_address": "00406e2c",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00406b7e",
+              "00406c14",
+              "00406c30",
+              "00406c64"
+            ]
+          },
+          {
+            "literal_address": "00407064",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00406cc4",
+              "00406ea2"
+            ]
+          },
+          {
+            "literal_address": "004074cc",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00407106"
+            ]
+          },
+          {
+            "literal_address": "00407700",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040750a"
+            ]
+          },
+          {
+            "literal_address": "00407988",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00407752"
+            ]
+          },
+          {
+            "literal_address": "00407ab0",
+            "value": "2000cea8",
+            "reference_sources": [
+              "004079d2"
+            ]
+          },
+          {
+            "literal_address": "00407b8c",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00407af8"
+            ]
+          },
+          {
+            "literal_address": "00407cbc",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00406dbc",
+              "00407bf6"
+            ]
+          },
+          {
+            "literal_address": "00407e14",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00407d1e"
+            ]
+          },
+          {
+            "literal_address": "00407f50",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00407e74"
+            ]
+          },
+          {
+            "literal_address": "0040812c",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00407fbe"
+            ]
+          },
+          {
+            "literal_address": "00408240",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00408182"
+            ]
+          },
+          {
+            "literal_address": "00408334",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00408298"
+            ]
+          },
+          {
+            "literal_address": "0040846c",
+            "value": "2000cea8",
+            "reference_sources": [
+              "004083a2"
+            ]
+          },
+          {
+            "literal_address": "004086c0",
+            "value": "2000cea8",
+            "reference_sources": [
+              "004084ce"
+            ]
+          },
+          {
+            "literal_address": "00408784",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00408762",
+              "00408758"
+            ]
+          },
+          {
+            "literal_address": "00408bfc",
+            "value": "2000cea8",
+            "reference_sources": [
+              "004087d4",
+              "004087ee",
+              "00408806",
+              "004089f8",
+              "00408a8c",
+              "00408a96"
+            ]
+          },
+          {
+            "literal_address": "00408e44",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00408c84"
+            ]
+          },
+          {
+            "literal_address": "00409024",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040900a"
+            ]
+          },
+          {
+            "literal_address": "00409060",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040903e",
+              "00408ea6"
+            ]
+          },
+          {
+            "literal_address": "00409460",
+            "value": "2000cea8",
+            "reference_sources": [
+              "004090a6"
+            ]
+          },
+          {
+            "literal_address": "00409570",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040946e"
+            ]
+          },
+          {
+            "literal_address": "00409678",
+            "value": "2000cea8",
+            "reference_sources": [
+              "004092c0"
+            ]
+          },
+          {
+            "literal_address": "00409778",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040963c",
+              "004093ce"
+            ]
+          },
+          {
+            "literal_address": "00409a74",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409792",
+              "0040972e",
+              "00409720"
+            ]
+          },
+          {
+            "literal_address": "00409b6c",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409b12"
+            ]
+          },
+          {
+            "literal_address": "00409ccc",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409c26"
+            ]
+          },
+          {
+            "literal_address": "00409d78",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409d30"
+            ]
+          },
+          {
+            "literal_address": "00409e04",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409dde"
+            ]
+          },
+          {
+            "literal_address": "00409e60",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409bf0",
+              "00409bae"
+            ]
+          },
+          {
+            "literal_address": "0040a164",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409dc2"
+            ]
+          },
+          {
+            "literal_address": "0040a1ec",
+            "value": "2000cea8",
+            "reference_sources": [
+              "00409e54"
+            ]
+          },
+          {
+            "literal_address": "0040a278",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040a212",
+              "0040a238",
+              "00409f3c"
+            ]
+          },
+          {
+            "literal_address": "0040a42c",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040a2b8"
+            ]
+          },
+          {
+            "literal_address": "0040a548",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040a49a",
+              "0040a1a2"
+            ]
+          },
+          {
+            "literal_address": "0040a5cc",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040a584"
+            ]
+          },
+          {
+            "literal_address": "0040a908",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040a778",
+              "0040a78c",
+              "0040a85e",
+              "0040a8b0"
+            ]
+          },
+          {
+            "literal_address": "0040a9e4",
+            "value": "2000cea8",
+            "reference_sources": [
+              "0040a974",
+              "0040a684"
+            ]
+          }
+        ],
+        "scope": "Static exact manager/callback/elapsed/thermal/scheduler entries. Repaired shared-body boundaries only in read-only analysis. Literal inventory is a bounded pointer/reference search, not proof against computed/general memory writers. No hardware execution."
+      },
+      "file_sha256": {
+        "analysis.json": "9e3ff634c9d3cf750c9b175b26da51055695b3fdabd2be9e12b9991c9254a876",
+        "functions.jsonl": "c53f1764df83499d563c2e0364b84cb1a2ac5dbf11b9a6e92e32619a7510a01b",
+        "instructions.jsonl": "55f34511cf2a133e12bd78a8b2437f6fd556668a2ff976281ab57bf1d2ae3190"
+      }
+    },
+    "c2_callback": {
+      "local_directory": "artifacts/firmware/c2-startup-verification-20261016",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "cases": 69,
+        "instruction_steps": 2235,
+        "distinct_executed_instructions": 39,
+        "mode_callbacks": 147,
+        "all_expected_results_match": true,
+        "entries": [
+          "00409e64 dispatcher",
+          "0040a954 USB-C callback"
+        ],
+        "stop": "0040306a return sentinel",
+        "scope": "Original dispatcher and USB-C callback, both ports, gates0/1/2/3, caps0/7, incomingr2 overwritten, reconciler result0/1, plus five sequential calls. All context and guard bytes checked; desired cap and state/timestamp changes asserted before reconciliation. Timer/log/reconciler external helpers stubbed after original branch/call. No manager elapsed-time branch, initialization routine, live scheduler, bus acknowledgement, readback, electrical behavior or hardware execution. The callback stores gate1/timestamp on the first C1 cap dispatch even cap0; any nonzero C2 cap dispatch sets gate3 before reconciliation, irrespective of its result. Instance-local fixed-Thumb workaround changes no original firmware or p-code."
+      },
+      "file_sha256": {
+        "cases.jsonl": "a36d06a14f2d48a83757406d8b0e5af58b799e2780dd9cd5e0735f53ff1da984",
+        "executed-instructions.jsonl": "2ef6269a8e95a467d7721411d421faa4203ae02292e8ca05d60c3d4069ec69bc",
+        "verification.json": "387f2a3fb6145af1ad9f8d7919013d10e154d39aa961884bd4d0d1f97a7493cb"
+      }
+    },
+    "manager": {
+      "local_directory": "artifacts/firmware/allocation-manager-verification-20261016",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "cases": 288,
+        "instruction_steps": 94603,
+        "distinct_executed_instructions": 467,
+        "mode_callbacks": 9819,
+        "all_expected_results_match": true,
+        "scope": "Original manager, actual elapsed helper, thermal budget getter, zero row, cap getter, dispatcher and USB-C desired callbacks. Seven stage projections also execute original allocator and Apple scene variants. Other allocation calls use a scripted four-cap row; classifier/current scene/probe/UI/log/timer source/reconciler bodies scripted. SC callback uses explicit desired-cache update stub; no SC register/bus code. Complete synthetic context and guards compared, argument/callback order, all recalculation triggers and suppressed triggers, elapsed1499/1500/1501 including wrap, result0/1, AI refresh59999/60000/60001 and six retained-RAM manager calls. Stage projections and sequence inject thermalstage/dirty rather than executing thermal evaluator/scheduler. No physical ACK, calibration, negotiation, sustained hardware timeline or liveness guarantee. Fixed-Thumb instance workaround changes no original bytes/p-code."
+      },
+      "file_sha256": {
+        "cases.jsonl": "672ed5925c0b0bb75f80a8e65de99a1166efcea93851d1b269d9ef8491be2bfa",
+        "executed-instructions.jsonl": "67a6df97bb148d6195c29b322388a21b5c3ca4a63e2afb6217ac89b9a6f073ca",
+        "verification.json": "2b4f0e5f87abc97d93c85278f565e2fb76176d753e6563136270add5971f3565"
+      }
+    },
+    "thermal": {
+      "local_directory": "artifacts/firmware/thermal-stage-dirty-verification-20261016",
+      "metadata": {
+        "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+        "entry": "00408c7c",
+        "cases": 1659,
+        "instruction_steps": 82987,
+        "distinct_executed_instructions": 187,
+        "mode_callbacks": 5476,
+        "publisher_calls": 120,
+        "all_expected_results_match": true,
+        "sequential_stage_events": [
+          {
+            "call": 1,
+            "sensor_signed_byte": 127,
+            "from": 0,
+            "to": 1,
+            "dirty": 1
+          },
+          {
+            "call": 202,
+            "sensor_signed_byte": 127,
+            "from": 1,
+            "to": 2,
+            "dirty": 1
+          },
+          {
+            "call": 403,
+            "sensor_signed_byte": 127,
+            "from": 2,
+            "to": 3,
+            "dirty": 1
+          },
+          {
+            "call": 604,
+            "sensor_signed_byte": 0,
+            "from": 3,
+            "to": 2,
+            "dirty": 1
+          },
+          {
+            "call": 805,
+            "sensor_signed_byte": 0,
+            "from": 2,
+            "to": 1,
+            "dirty": 1
+          },
+          {
+            "call": 1006,
+            "sensor_signed_byte": 0,
+            "from": 1,
+            "to": 0,
+            "dirty": 1
+          }
+        ],
+        "scope": "Original evaluator instructions including signed threshold lookup, countdown, transition counter, dirty writes and graphic interpolation. Corrected sensor4090a4, hardware getter417d60, logs and tail publisher406aa4 are scripted. Entire manager context and guards compared; numeric graphic is observed, not independently predicted. Publisher stage/graphic arguments are checked against resulting context. Sequential cycle retains complete prior context, resetting dirty to0 to model manager consumption between calls; manager and scheduler are not executed. No wall-clock scale, acquisition calibration, IRQ concurrency, bus writes or controller acceptance tested. Instance-local fixed-Thumb workaround changes no original instructions or p-code."
+      },
+      "file_sha256": {
+        "cases.jsonl": "613ea2db732250d147131b9bf7ceb430a98b3081057df398c0edfbd31a7a528d",
+        "executed-instructions.jsonl": "a109c10a53171767c5ff8a28d3038428136eb9f87d2c31aabfe8181762aac041",
+        "verification.json": "609746958e0d1b78b29ead53dbcce1d56717fdfd78eeb48957c3ad1f7fb4017c"
+      }
+    }
+  },
+  "totals": {
+    "cases": 2016,
+    "original_instruction_steps": 179825,
+    "all_exported_instruction_bytes_match_raw": true
+  },
+  "manager_trigger_examples": [
+    {
+      "name": "stable",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 120
+    },
+    {
+      "name": "count",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 268
+    },
+    {
+      "name": "hint_sum",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 274
+    },
+    {
+      "name": "port_mode",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 278
+    },
+    {
+      "name": "disabled_mask",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 282
+    },
+    {
+      "name": "dirty",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 284
+    },
+    {
+      "name": "scene",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 303
+    },
+    {
+      "name": "gate2",
+      "gate_before": 2,
+      "gate_after": 2,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 292
+    },
+    {
+      "name": "ADC_state3",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 295
+    },
+    {
+      "name": "classifier3",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 297
+    },
+    {
+      "name": "thermal_stage_without_dirty_synthetic",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 2,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 900,
+      "remaining_signed16": 700,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 120
+    },
+    {
+      "name": "AC_selector_without_dirty_synthetic",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 120
+    },
+    {
+      "name": "classifier4",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 297
+    },
+    {
+      "name": "AI_refresh_boundary",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 60099,
+      "elapsed_helper_value": 59999,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 134
+    },
+    {
+      "name": "AI_refresh_boundary",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 60100,
+      "elapsed_helper_value": 60000,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 1,
+      "quick_classifier_calls": 0,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 138
+    },
+    {
+      "name": "AI_refresh_boundary",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 60101,
+      "elapsed_helper_value": 60001,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 1,
+      "quick_classifier_calls": 0,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 138
+    },
+    {
+      "name": "host_state_sum_gate",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1200,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 238
+    },
+    {
+      "name": "host_state_sum_gate",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 930,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 247
+    },
+    {
+      "name": "host_state_sum_gate",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 930,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 247
+    }
+  ],
+  "manager_retained_context_sequence": [
+    {
+      "name": "sequence_start",
+      "gate_before": 0,
+      "gate_after": 1,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          0,
+          7
+        ],
+        [
+          2,
+          96
+        ],
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 336
+    },
+    {
+      "name": "sequence_1",
+      "gate_before": 1,
+      "gate_after": 1,
+      "clock_start": 100,
+      "clock_now": 1599,
+      "elapsed_helper_value": 1499,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": false,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 134
+    },
+    {
+      "name": "sequence_2",
+      "gate_before": 1,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 1600,
+      "elapsed_helper_value": 1500,
+      "stage": 0,
+      "dirty_before": 0,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          1,
+          4
+        ],
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 350
+    },
+    {
+      "name": "sequence_3",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 1601,
+      "elapsed_helper_value": 1501,
+      "stage": 3,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 0,
+      "zero_row_calls": 1,
+      "budget": 0,
+      "remaining_signed16": -200,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 385
+    },
+    {
+      "name": "sequence_4",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 1602,
+      "elapsed_helper_value": 1502,
+      "stage": 2,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 900,
+      "remaining_signed16": 700,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          96
+        ],
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 371
+    },
+    {
+      "name": "sequence_5",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 1603,
+      "elapsed_helper_value": 1503,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": false,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 284
+    }
+  ],
+  "real_allocator_stage_projections": [
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 748
+    },
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 1,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 748
+    },
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 2,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 900,
+      "remaining_signed16": 700,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 825
+    },
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 3,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 0,
+      "zero_row_calls": 1,
+      "budget": 0,
+      "remaining_signed16": -200,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 385
+    },
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 2,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 900,
+      "remaining_signed16": 700,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 825
+    },
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 1,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 748
+    },
+    {
+      "name": "real_allocator_stage_projection",
+      "gate_before": 3,
+      "gate_after": 3,
+      "clock_start": 100,
+      "clock_now": 100,
+      "elapsed_helper_value": 0,
+      "stage": 0,
+      "dirty_before": 1,
+      "recalculated": true,
+      "actual_allocator": true,
+      "allocator_calls": 1,
+      "zero_row_calls": 0,
+      "budget": 1200,
+      "remaining_signed16": 1000,
+      "full_classifier_calls": 0,
+      "quick_classifier_calls": 1,
+      "reconciler_scripted_result": 0,
+      "dispatch": [
+        [
+          3,
+          96
+        ]
+      ],
+      "complete_context_and_guards_match": true,
+      "instruction_steps": 748
+    }
+  ],
+  "gate_writers": [
+    {
+      "instruction": "0040943e",
+      "state": 0,
+      "condition": "initializer; timestamp0 at40943c"
+    },
+    {
+      "instruction": "0040a980",
+      "state": 1,
+      "condition": "C1 desired-cap callback while state0, including cap0; tick at40a986 before reconciliation"
+    },
+    {
+      "instruction": "00408528",
+      "state": 2,
+      "condition": "manager observes state1 and original elapsed helper returns>=1500"
+    },
+    {
+      "instruction": "0040a992",
+      "state": 3,
+      "condition": "C2 desired-cap callback nonzero, before reconciliation"
+    }
+  ],
+  "scope_limits": [
+    "No physical ACK, bus execution, calibration, negotiation or wall-clock duration tested.",
+    "Retained-context manager and thermal cycles are separate; manager stage/dirty injection and thermal dirty consumption are explicit.",
+    "Allocator body is scripted except seven original Apple-scene stage projections. SC callback body is scripted.",
+    "Writer search is bounded to exact raw literals, available references and reviewed stores; computed/general writes remain possible.",
+    "Initial independent worker reported39 manager-base literals; raw and Ghidra inventory independently establish38. No firmware fixture failures occurred."
+  ]
+}

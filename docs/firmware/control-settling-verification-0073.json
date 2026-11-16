@@ -1,0 +1,43 @@
+{
+  "control_byte": {
+    "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+    "cases": 108,
+    "instruction_steps": 3582,
+    "distinct_executed_instructions": 59,
+    "mode_callbacks": 558,
+    "all_expected_results_match": true,
+    "entry": "0040a5f4",
+    "stops": [
+      "0040a694 before POP",
+      "0040a6a2 before POP"
+    ],
+    "initial_attempt": "The first fixture run seeded state at the wrong synthetic address and stopped after nine passing cases. The completed run uses state at2000cf22+port, confirmed by raw literal40a9e4=2000cea8 plus0x7a. The initial partial output is not successful evidence.",
+    "scope": "Original reconciler branch/argument behaviour: both ports; synthetic desired byte3 values0/60/255; failed read,equality,isolated mismatch of each byte; states0/1/2. Scripted read81 writes four data bytes plus dummy checksum and returns requested status. Bus/checksum,logger,write-helper and reset-helper bodies are stubbed after original BL. Four-byte written payload checked exactly; complete desired-context buffer/guards preserved. Non-default desired values are synthetic inputs, not recovered host settings or approved tuning. Byte2-only mismatch does not write; byte3 mismatch writes full desired profile, with reset callback for state!=0. Physical ACK/readback, actual reset state change, electrical meaning, runtime writers and negotiation excluded. Instance-local fixed-Thumb callback workaround changes no original firmware/p-code."
+  },
+  "settling": {
+    "sha256": "65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1",
+    "cases": 560,
+    "instruction_steps": 20906,
+    "mode_callbacks": 2016,
+    "distinct_executed_instructions": 209,
+    "all_expected_results_match": true,
+    "stub_calls": {
+      "delay_10_argument_no_wait": 544,
+      "insertion_timestamp_fixed_1": 2,
+      "logger": 1712,
+      "memcmp_six_semantic": 58
+    },
+    "scope": "Both ports: isolated original settling block 40a81c..40a82e with tail branches40a89a..40a902; actual transition409c1c, snapshot4053ac, comparison409bec, power409d08, initial-state4054ee. Separately executes original405e5c cache updater in worker order. Covers threshold edges, shared-counter zero, changed enum, each metadata byte, ongoing metadata jitter, special enums3..6 previous-snapshot consumption and all256 reduction enum inputs. Entire context and adjacent cache/event guards asserted.",
+    "limits": [
+      "No full worker/bus/checksum reader execution; entry assumes accepted current six-byte record and initialized registers",
+      "memcmp replaced by exact six-byte equality, bodies not independently emulated",
+      "logger and delay bodies stubbed; insertion timestamp helper replaced by fixed timestamp1",
+      "No telemetry accumulator/PFC/allocator/scheduler/ROM or physical negotiation executes",
+      "No sequential multi-poll timeline: boundary fixtures initialize explicit prior state/counter/cache",
+      "State numbers0/1/2 are internal host states, not named charging protocols",
+      "Checksum bytes recomputed for metadata mutations; no checksum-only physically valid packet asserted",
+      "Original full-worker copy/0x83 failure-order proof remains stage27"
+    ],
+    "emulator_workaround": "Instance-local fixed-Thumb setISAMode callback replacement; rejects ARM transitions, preserves original instruction p-code and firmware bytes."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "provenance": "User-supplied app diagnostic report; not an instrumented capture or independent measurement.",
+  "received_date": "2026-10-14",
+  "capture_date": null,
+  "reported_snapshot_time": "15:25:29",
+  "reported_firmware": "2.1.2_0073",
+  "reported_connected": true,
+  "phone_and_cable_models": "Not supplied; the reporter described an Apple phone and a tablet.",
+  "protocol_enable_mask_hex": "03030f0f",
+  "normal_port_readings": [
+    {"port": "C1", "assigned_cap_w": 55, "volts": 9.1, "amps": 1.5, "protocol_pair_hex": "071b"},
+    {"port": "C2", "assigned_cap_w": 70, "volts": 8.5, "amps": 1.7, "protocol_pair_hex": "010f"},
+    {"port": "C3", "reported_idle": true, "volts": 0.0, "amps": 0.0, "protocol_pair_hex": "0000"},
+    {"port": "A", "reported_idle": true, "volts": 0.0, "amps": 0.0, "protocol_pair_hex": "0000"}
+  ],
+  "vendor_frames": [
+    {"selector": 1, "length": 21, "hex": "fedcba01f10173008d3b200104017f4a04017f4aef"},
+    {"selector": 2, "length": 18, "hex": "fedcba01f1020a28242c07020129000000ef"},
+    {"selector": 6, "length": 18, "hex": "fedcba01f1060a04076060071b083c0000ef"}
+  ],
+  "limits": [
+    "No per-field timestamps, original BLE trace, ATT MTU, app version or reconnect result were supplied.",
+    "No account identifiers, credentials, tokens, cookies or device address are included.",
+    "Reply byte agreement supports three mapped layouts; it does not validate physical sensor accuracy or all vendor selectors.",
+    "Normal MIOT and native controller caches can represent different times."
+  ]
+}
