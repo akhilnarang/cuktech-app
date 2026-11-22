@@ -36,7 +36,8 @@ public class TemperatureQueryTest {
         s.engine.setSceneMode(2);
         assertTrue(s.writes().isEmpty());
         s.subscribed(true);
-        assertArrayEquals(new byte[]{(byte)0xfe,(byte)0xdc,(byte)0xba,1,(byte)0xf1,0,1,2}, s.writes().get(0));
+        // 9 bytes: firmware 2.1.2_0079 drops AF07 writes shorter than 9 bytes (dispatcher 0x4203b4: cmp #9).
+        assertArrayEquals(new byte[]{(byte)0xfe,(byte)0xdc,(byte)0xba,1,(byte)0xf1,0,1,2,0}, s.writes().get(0));
         s.reply(TelemetryDecodeTest.temperature(45));
         assertEquals(Integer.valueOf(45), s.charger.results.temperature);
         assertEquals(Boolean.TRUE, s.charger.results.last("temperature"));
@@ -104,7 +105,7 @@ public class TemperatureQueryTest {
         s.engine.setHolidayArtwork(true);
         s.engine.requestDiagnostics(); // busy: must not erase the pending setter argument.
         s.subscribed(true);
-        assertArrayEquals(VendorStatus.holidayRequest(true), s.writes().get(0));
+        assertArrayEquals(new byte[]{(byte)0xfe,(byte)0xdc,(byte)0xba,1,(byte)0xf1,0,1,9,1}, s.writes().get(0));
         byte[] reply = {(byte)0xfe,(byte)0xdc,(byte)0xba,1,(byte)0xf1,9,1,0,(byte)0xef};
         s.reply(reply);
         assertEquals("startup artwork", s.charger.results.what.get(s.charger.results.what.size() - 1));

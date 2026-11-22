@@ -1,5 +1,6 @@
 package dev.akhilnarang.cuktech.ui.controller
 
+import dev.akhilnarang.cuktech.firmware.FirmwareSupport
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -14,7 +15,7 @@ import dev.akhilnarang.cuktech.theme.portColor
 internal fun DiagnosticsContent(state: ControllerState, actions: ControllerActions, wide: Boolean) {
     val latest = state.thermalHistory.lastOrNull()
     val thermal = latest?.reading?.thermal
-    val supported = state.firmware == "2.1.2_0073"
+    val supported = state.firmware in FirmwareSupport.DIAGNOSTICS
     Panel {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { Pill("ON REQUEST"); Pill("EXPERIMENTAL") }
         Text("Thermal snapshot", style = MaterialTheme.typography.titleLarge)
@@ -29,7 +30,7 @@ internal fun DiagnosticsContent(state: ControllerState, actions: ControllerActio
             OutlinedButton(onClick = actions.diagnostics, enabled = state.canControl && supported) { Text("Read all diagnostics") }
         }
         Caption("Each request stops output updates for a short time, then the app reconnects. Sensor reads are manual to prevent repeated interruptions.")
-        if (!supported) Caption("Diagnostic layouts are known only for firmware 2.1.2_0073. Connect to read your version.")
+        if (!supported) Caption("Diagnostic layouts are known only for firmware ${FirmwareSupport.describe(FirmwareSupport.DIAGNOSTICS)}. Connect to read your version.")
         state.temperatureNote?.let { Caption(it) }
     }
     if (state.thermalHistory.isNotEmpty()) Panel {

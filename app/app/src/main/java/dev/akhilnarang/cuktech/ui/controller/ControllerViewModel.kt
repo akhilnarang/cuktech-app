@@ -1,5 +1,6 @@
 package dev.akhilnarang.cuktech.ui.controller
 
+import dev.akhilnarang.cuktech.firmware.FirmwareSupport
 import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
@@ -456,12 +457,12 @@ class ControllerViewModel(app: Application) : AndroidViewModel(app) {
     return PortProtocol.decode(port, v)
   }
 
-/** Reads the thermal snapshot (vendor query). Firmware 2.1.2_0073 only. Live data pauses during the query. */
+/** Reads the thermal snapshot (vendor query). Only for [FirmwareSupport.DIAGNOSTICS]. Live data pauses during the query. */
   fun readTemperature() {
     val e = engine ?: return
     if (!e.isReady || busy || e.isBusy) return
-    if (firmwareVersion != "2.1.2_0073") {
-      temperatureNote = "This diagnostic is known only for firmware 2.1.2_0073. Installed version: ${firmwareVersion ?: "unknown"}"
+    if (firmwareVersion !in FirmwareSupport.DIAGNOSTICS) {
+      temperatureNote = "This diagnostic is known only for firmware ${FirmwareSupport.describe(FirmwareSupport.DIAGNOSTICS)}. Installed version: ${firmwareVersion ?: "unknown"}"
       return
     }
     busy = true
@@ -473,12 +474,12 @@ class ControllerViewModel(app: Application) : AndroidViewModel(app) {
     e.requestTemperature()
   }
 
-/** Reads all vendor diagnostic snapshots. Firmware 2.1.2_0073 only. Live data pauses during the query. */
+/** Reads all vendor diagnostic snapshots. Only for [FirmwareSupport.DIAGNOSTICS]. Live data pauses during the query. */
   fun readDiagnostics() {
     val e = engine ?: return
     if (!e.isReady || busy || e.isBusy) return
-    if (firmwareVersion != "2.1.2_0073") {
-      temperatureNote = "Diagnostics are known only for firmware 2.1.2_0073. Installed version: ${firmwareVersion ?: "unknown"}"
+    if (firmwareVersion !in FirmwareSupport.DIAGNOSTICS) {
+      temperatureNote = "Diagnostics are known only for firmware ${FirmwareSupport.describe(FirmwareSupport.DIAGNOSTICS)}. Installed version: ${firmwareVersion ?: "unknown"}"
       return
     }
     busy = true
@@ -491,10 +492,10 @@ class ControllerViewModel(app: Application) : AndroidViewModel(app) {
     e.requestDiagnostics()
   }
 
-/** Sets the startup artwork flag. Firmware 2.1.2_0073 only. The change shows after the charger restarts. */
+/** Sets the startup artwork flag. Only for [FirmwareSupport.STARTUP_ARTWORK]. The change shows after the charger restarts. */
   fun setHolidayArtwork(enabled: Boolean) {
     val e = engine ?: return
-    if (!e.isReady || busy || e.isBusy || firmwareVersion != "2.1.2_0073") return
+    if (!e.isReady || busy || e.isBusy || firmwareVersion !in FirmwareSupport.STARTUP_ARTWORK) return
     busy = true
     operation = "Changing startup artwork…"
     note = null
@@ -589,9 +590,9 @@ class ControllerViewModel(app: Application) : AndroidViewModel(app) {
     set(MiProto.PIID_PORT_CTL, mask.toLong()) { setPortMask(mask) }
   }
 
-/** Sets one protocol-enable bit. Firmware 2.1.2_0073 only. */
+/** Sets one protocol-enable bit. Only for [FirmwareSupport.PROTOCOL_SWITCHES]. */
   fun setProtocol(bit: Int, on: Boolean) {
-    if (firmwareVersion != "2.1.2_0073") return
+    if (firmwareVersion !in FirmwareSupport.PROTOCOL_SWITCHES) return
     val old = props[MiProto.PIID_PROTOCOL_CTL_EXTEND] ?: return
     val next = ProtocolControls.update(old, bit, on)
     set(MiProto.PIID_PROTOCOL_CTL_EXTEND, next) { setProtocolFlag(bit, on) }

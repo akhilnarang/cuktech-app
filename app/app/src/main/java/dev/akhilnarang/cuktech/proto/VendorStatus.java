@@ -22,27 +22,18 @@ public final class VendorStatus {
     private VendorStatus() {}
 
     /**
-     * Builds the request f1 / group 1 / status 2 (sensors and power state).
-     * The class has no generic command builder.
-     *
-     * @return An 8-byte request frame.
-     */
-    public static byte[] temperatureRequest() {
-        return statusRequest(2);
-    }
-
-    /**
      * Builds a status request.
      *
      * @param selector 1 = controller versions, 2 = sensors and power state,
      *        6 = charging controllers.
-     * @return An 8-byte request frame.
+     * @return A 9-byte request frame. The last byte is padding: firmware 2.1.2_0079 drops
+     *         writes shorter than 9 bytes, and 2.1.2_0073 ignores the 9th byte for these selectors.
      * @throws IllegalArgumentException If the selector is not 1, 2 or 6.
      */
     public static byte[] statusRequest(int selector) {
         if (selector != 1 && selector != 2 && selector != 6)
             throw new IllegalArgumentException("unsupported diagnostic selector");
-        return new byte[]{(byte)0xfe, (byte)0xdc, (byte)0xba, 1, (byte)0xf1, 0, 1, (byte)selector};
+        return new byte[]{(byte)0xfe, (byte)0xdc, (byte)0xba, 1, (byte)0xf1, 0, 1, (byte)selector, 0};
     }
 
     /**

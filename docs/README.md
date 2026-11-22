@@ -31,6 +31,7 @@ record hashes, so that you can reproduce the results with the same inputs.
 - [Analysis boundaries and recovery](firmware-boundaries-and-recovery.md): the limits of static analysis, and the conditions to meet before a write or a recovery attempt.
 - [Coverage ledger](firmware/coverage-ledger.md): the measured, reproducible coverage of the firmware by focused exports. It is not a percentage of "understanding".
 - [Coverage inputs (JSON)](firmware/coverage-inputs-0073.json): input manifest for the coverage tool.
+- [Firmware 2.1.2_0079](firmware/diff-0079.md): what changed compared with 0073, and the effect on the app.
 
 ## Protocol & BLE
 

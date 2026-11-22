@@ -7,6 +7,8 @@ Android app versions. All releases are experimental.
 - Pairing: if the charger stops the transfer before it is ready, the app now stops at once. Before, it waited 10 s.
 - A saved token with a damaged format now sends you back to setup.
 - PC tool: two-factor login now requests the final login step one time, not two times.
+- Firmware 2.1.2_0079: diagnostics, the thermal readout, protocol switches and direct installation are now available. The startup-artwork switch stays 0073-only, because 0079 removed the artwork.
+- Diagnostic requests now have 9 bytes. Firmware 2.1.2_0079 does not reply to the old 8-byte requests.
 
 ## 0.8.2
 - Port cards keep a fixed size when a port negotiates again or when its power or protocol changes.

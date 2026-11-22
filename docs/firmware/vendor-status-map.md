@@ -52,7 +52,11 @@ values include write operations. Do not offer them as a free command input.
 | `fe dc ba 01 f1 00 02 00` | 24 | `0x0041c888` | ADC conversion, boot-record CRC, and cached version/control state |
 
 Group 2 ignores the last selector byte in this handler. The constant eight-byte
-request above prevents a short packet. AF08 fragmentation is not confirmed on
+request above prevents a short packet.
+
+Firmware 2.1.2_0079 drops AF07 writes shorter than 9 bytes. Thus the app adds a ninth
+byte `00` to the read requests above. The 0073 handlers do not read this byte. See
+[diff-0079.md](diff-0079.md). AF08 fragmentation is not confirmed on
 hardware. A 21-byte value needs an ATT MTU of at least 24. A 24-byte value needs
 an MTU of at least 27. The two 18-byte replies fit in the default MTU of 23. Until
 the behaviour of the live stack is known, do not assume that the larger replies

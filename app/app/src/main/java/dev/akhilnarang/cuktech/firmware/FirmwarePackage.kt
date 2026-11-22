@@ -28,15 +28,9 @@ class FirmwarePackage private constructor(val bytes: ByteArray, val info: Firmwa
     companion object {
 /** The only model that direct installation supports (China AD1204). */
         const val MODEL = "njcuk.fitting.ad1204"
-/** The only running version for which the app knows the direct install flow. */
-        const val RECEIVER_VERSION = "2.1.2_0073"
 /** Maximum image size, in bytes (0x7c000 = 507904). This is the known staging limit. */
         const val MAX_SIZE = 0x7c000
-/** Metadata of the official 0073 package, from earlier research. It is not a live check for new firmware. The file stays on Xiaomi's CDN; the user downloads it. */
-        val KNOWN_0073 = FirmwareInfo(MODEL, RECEIVER_VERSION,
-            "https://iot-ota-cdn.io.mi.com/miio_fw/signed_0bd090bce659c906f3d933f55cc3027c_upd_njcuk.fitting.ad1204.bin",
-            "0bd090bce659c906f3d933f55cc3027c", "Previously researched official Xiaomi package. Not a live check for newer firmware.")
-        private val magic = hex("000000004d49ef54464f544182562647")
+private val magic = hex("000000004d49ef54464f544182562647")
         private val root = hex("04bef58b02dae3fff8541aa0448fbac44db7c69a2fa8f0b1b6ff7ad951db6628fad7f020ea39a2ee867fdd783fdc2fb086095cc2850413a2802c627dbdc715f4f9")
         private fun hex(s: String) = s.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
         private fun requirePackage(ok: Boolean, message: String) { if (!ok) throw IllegalArgumentException(message) }

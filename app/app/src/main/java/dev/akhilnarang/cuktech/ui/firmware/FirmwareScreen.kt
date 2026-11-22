@@ -1,5 +1,6 @@
 package dev.akhilnarang.cuktech.ui.firmware
 
+import dev.akhilnarang.cuktech.firmware.FirmwareSupport
 import android.widget.Toast
 import android.Manifest
 import android.os.Build
@@ -64,7 +65,7 @@ fun FirmwareScreen(onBack: () -> Unit, vm: FirmwareViewModel = viewModel(extras 
                 Text("Official signed packages · local Bluetooth installation", style = MaterialTheme.typography.bodySmall)
             }
         }
-        Text("Download official firmware and install it directly over Bluetooth. Direct installation is experimental. It is known only for the China AD1204 with 2.1.2_0073.",
+        Text("Download official firmware and install it directly over Bluetooth. Direct installation is experimental. It is known only for the China AD1204 with ${FirmwareSupport.describe(FirmwareSupport.INSTALL_RECEIVERS)}.",
             color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (vm.needsSignIn) {
             ElevatedCard(Modifier.fillMaxWidth()) {

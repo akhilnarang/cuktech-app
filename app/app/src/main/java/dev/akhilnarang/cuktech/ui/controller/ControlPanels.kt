@@ -1,5 +1,6 @@
 package dev.akhilnarang.cuktech.ui.controller
 
+import dev.akhilnarang.cuktech.firmware.FirmwareSupport
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.toggleable
@@ -118,7 +119,7 @@ private fun DisplayPanel(state: ControllerState, actions: ControllerActions) {
         SwitchSetting("Lock screen orientation", "Keep the charger's display from rotating.", state.props[MiProto.PIID_SCREEN_DIR_LOCK], state.canControl, actions.orientation)
         val artwork = state.snapshots[9]?.reading?.holidayArtwork ?: state.snapshots[2]?.reading?.holidayArtwork
         SwitchSetting("Holiday startup artwork", if (artwork == null) "Read sensors in Insights to get this setting." else "Appears at the next charger restart.",
-            artwork?.let { if (it) 1L else 0L }, state.canControl && state.firmware == "2.1.2_0073", actions.artwork)
+            artwork?.let { if (it) 1L else 0L }, state.canControl && state.firmware in FirmwareSupport.STARTUP_ARTWORK, actions.artwork)
     }
 }
 
@@ -135,12 +136,12 @@ private fun ProtocolPanel(state: ControllerState, actions: ControllerActions) {
                 ProtocolControls.BITS[i].forEachIndexed { n, bit ->
                     val on = mask != null && mask and (1L shl bit) != 0L
                     FilterChip(selected = on, onClick = { actions.protocol(bit, !on) },
-                        enabled = state.canControl && mask != null && state.firmware == "2.1.2_0073", label = { Text(ProtocolControls.LABELS[i][n]) })
+                        enabled = state.canControl && mask != null && state.firmware in FirmwareSupport.PROTOCOL_SWITCHES, label = { Text(ProtocolControls.LABELS[i][n]) })
                 }
             }
         }
         Caption("PPS needs PD. Enabling PPS also enables PD, and disabling PD disables PPS. C3/A changes can need a cable replug. Reserved bits do not change. A saved setting does not prove the negotiated protocol.")
-        if (state.firmware != "2.1.2_0073") Caption("These switches are known only for firmware 2.1.2_0073.")
+        if (state.firmware !in FirmwareSupport.PROTOCOL_SWITCHES) Caption("These switches are known only for firmware ${FirmwareSupport.describe(FirmwareSupport.PROTOCOL_SWITCHES)}.")
     }
 }
 

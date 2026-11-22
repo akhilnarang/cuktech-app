@@ -16,7 +16,7 @@ internal class FirmwareInstaller(private val context: Context) {
 /**
  * Sends [image] to the charger and confirms the new running version.
  *
- * The charger must advertise pid 0x660e as bound, and it must run [FirmwarePackage.RECEIVER_VERSION].
+ * The charger must advertise pid 0x660e as bound, and it must run a version in [FirmwareSupport.INSTALL_RECEIVERS].
  * Downgrades are refused. After the transfer, it waits 5 s, then tries to verify a maximum of 6 times,
  * 3 s apart. It never sends the image a second time. The total time limit is 20 minutes.
  *
@@ -42,8 +42,8 @@ internal class FirmwareInstaller(private val context: Context) {
             link.open(address, token)
             val current = link.version()
             observedVersion(current)
-            check(current == FirmwarePackage.RECEIVER_VERSION) {
-                "Direct installation is known only for ${FirmwarePackage.RECEIVER_VERSION}. The charger reports $current."
+            check(current in FirmwareSupport.INSTALL_RECEIVERS) {
+                "Direct installation is known only for ${FirmwareSupport.describe(FirmwareSupport.INSTALL_RECEIVERS)}. The charger reports $current."
             }
             check(compareVersions(image.info.version, current) >= 0) { "Firmware downgrades are not supported" }
             reinstall = current == image.info.version

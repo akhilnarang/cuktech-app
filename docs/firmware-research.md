@@ -27,7 +27,8 @@ beta releases.
 | Signed OTA | 496,995 bytes | `0bd090bce659c906f3d933f55cc3027c` | `1724b63e797af6a76e43d61931e2361b537e653946a130d0441ca0ef9d5ed65a` |
 | Legacy raw image | 495,656 bytes | `c62a0cca0422986c4c15056a0e962691` | `65d96d0f6138a36fc62ce62325d055f934dac40d67bc31720f8182ebf5c80ce1` |
 
-Xiaomi CDN links that were seen. The files are hosted by Xiaomi; this repository does not include them:
+Xiaomi CDN links that were seen. The files are hosted by Xiaomi; this repository does not include them.
+On 2026-11-22 both links return HTTP 403. Xiaomi now serves only 2.1.2_0079 (see [the 0079 diff](firmware/diff-0079.md)):
 
 - [Signed OTA package](https://iot-ota-cdn.io.mi.com/miio_fw/signed_0bd090bce659c906f3d933f55cc3027c_upd_njcuk.fitting.ad1204.bin)
 - [Legacy raw image](https://iot-ota-cdn.io.mi.com/miio_fw/c62a0cca0422986c4c15056a0e962691_upd_njcuk.fitting.ad1204.bin)
