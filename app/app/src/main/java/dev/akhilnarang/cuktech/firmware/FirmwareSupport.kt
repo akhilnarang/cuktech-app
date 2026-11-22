@@ -7,17 +7,23 @@ package dev.akhilnarang.cuktech.firmware
  * feature is the same as in 2.1.2_0073. See `docs/firmware/diff-0079.md`.
  */
 object FirmwareSupport {
+    /** Firmware 2.1.2_0073, the version of the original analysis. */
+    const val V2_1_2_0073 = "2.1.2_0073"
+
+    /** Firmware 2.1.2_0079 (November 2026). */
+    const val V2_1_2_0079 = "2.1.2_0079"
+
     /** Vendor diagnostic snapshots (thermal, controller status, versions). */
-    val DIAGNOSTICS: Set<String> = setOf("2.1.2_0073", "2.1.2_0079")
+    val DIAGNOSTICS: Set<String> = setOf(V2_1_2_0073, V2_1_2_0079)
 
     /** Protocol-enable switches (`PIID_PROTOCOL_CTL_EXTEND`). */
-    val PROTOCOL_SWITCHES: Set<String> = setOf("2.1.2_0073", "2.1.2_0079")
+    val PROTOCOL_SWITCHES: Set<String> = setOf(V2_1_2_0073, V2_1_2_0079)
 
     /** Holiday startup artwork. 2.1.2_0079 removed the artwork; the flag remains but has no effect. */
-    val STARTUP_ARTWORK: Set<String> = setOf("2.1.2_0073")
+    val STARTUP_ARTWORK: Set<String> = setOf(V2_1_2_0073)
 
     /** Running versions for which the direct install flow is known. */
-    val INSTALL_RECEIVERS: Set<String> = setOf("2.1.2_0073", "2.1.2_0079")
+    val INSTALL_RECEIVERS: Set<String> = setOf(V2_1_2_0073, V2_1_2_0079)
 
     /**
      * @param versions One of the sets above.

@@ -1,5 +1,6 @@
 package dev.akhilnarang.cuktech.ui.controller
 
+import dev.akhilnarang.cuktech.firmware.FirmwareSupport
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.akhilnarang.cuktech.proto.*
@@ -31,7 +32,7 @@ object DemoData {
             title = "Dashboard preview", detail = "Generated example data", dot = Dot.Ok, ready = true, stale = false,
             connectionAction = "Exit preview", ports = listOf(PortTelemetry.decode(0, 0xc8120601L), PortTelemetry.decode(1, 0x5a140401L), PortTelemetry.decode(2, 0x5a076001L), PortTelemetry.decode(3, 0x00006000)),
             protocols = listOf(PortProtocol.decode(0, 0x07410837), PortProtocol.decode(1, 0x07410837), PortProtocol.decode(2, 0x0a160000), PortProtocol.decode(3, 0)),
-            receivedAt = List(4) { 300_000L }, nowMs = 300_000, firmware = "2.1.2_0073",
+            receivedAt = List(4) { 300_000L }, nowMs = 300_000, firmware = FirmwareSupport.V2_1_2_0073,
             props = mapOf(MiProto.PIID_SCENE_MODE to 1L, MiProto.PIID_PORT_CTL to 15L, MiProto.PIID_USB_A_ALWAYS_ON to 0L,
                 MiProto.PIID_SCREEN_SAVE_TIME to 30L, MiProto.PIID_SCREEN_OFF_IDLE to 1L, MiProto.PIID_SCREEN_DIR_LOCK to 0L,
                 MiProto.PIID_DEVICE_LANGUAGE to 0L, MiProto.PIID_PROTOCOL_CTL_EXTEND to 0x03030f0fL,
