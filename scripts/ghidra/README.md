@@ -18,12 +18,18 @@ your own charger with `uv run -m cuktech_pc.firmware fetch` (see the
 The scripts were tested with Ghidra 12.1.4, a full JDK 21 and Python 3.
 
 - The unpacker uses the standard library. `--verify` also needs `cryptography`.
-- `analyze-firmware.ps1` runs the Windows `analyzeHeadless.bat` from Ghidra.
-  On Linux/macOS, run the `analyzeHeadless` pre/post scripts that it lists
-  manually.
+- `analyze-firmware.sh` (Linux/macOS) and `analyze-firmware.ps1` (Windows) run
+  the same steps. The shell script was tested with Ghidra 12.2 on Linux, not yet on macOS.
 - The paths below are examples. Use your own paths.
 
-From the repository root (PowerShell):
+From the repository root (Linux/macOS):
+
+```bash
+scripts/ghidra/analyze-firmware.sh artifacts/firmware/njcuk.fitting.ad1204-2.1.2_0073-signed.bin \
+    artifacts/firmware/reproduced-0073 /path/to/ghidra --assets --split-unclassified --verify
+```
+
+From the repository root (Windows, PowerShell):
 
 ```powershell
 scripts/ghidra/analyze-firmware.ps1 `
@@ -242,6 +248,7 @@ No script touches a charger.
 
 | Script | Purpose |
 | --- | --- |
+| `analyze-firmware.sh` | End-to-end Linux/macOS driver: the same steps as `analyze-firmware.ps1` |
 | `analyze-firmware.ps1` | End-to-end Windows driver: unpack, import, reconstruct, repair, export and verify the 0073 image |
 | `PrepareChargerFirmware.java` | Pre-script: seed initial Thumb entries for the raw 0073 image (BinaryLoader at `0x00403000`) |
 | `ReconstructChargerMemory.java` | Map measured startup copy/expand regions from the unpacker's `manifest.json` |

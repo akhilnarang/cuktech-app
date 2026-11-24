@@ -202,13 +202,15 @@ The short procedure:
 ## Firmware download and offline research
 
 This repository does not include firmware images. Download the official
-package for your own charger with `cuktech_pc.firmware`. The tool stores the
-cloud session with Windows DPAPI. Thus `login` and `fetch` run only on Windows
-at this time. `inspect` runs on all platforms.
+package for your own charger with `cuktech_pc.firmware`. The tool saves the
+cloud session in `~/.cuktech_pc/firmware-session.json` (mode 0600) on Linux and
+macOS, and with DPAPI on Windows. For the full workflow from download to
+decompilation, see the [firmware how-to](../docs/firmware-howto.md).
 
 ```bash
 uv run -m cuktech_pc.firmware login --address AA:BB:CC:DD:EE:FF --region cn
 uv run -m cuktech_pc.firmware fetch            # verifies MD5 and the ECDSA signature
+uv run -m cuktech_pc.firmware fetch --legacy   # raw image; works also if the charger is not on the account
 uv run -m cuktech_pc.firmware inspect PATH/TO/IMAGE.bin
 uv run -m cuktech_pc.firmware forget-login
 ```
@@ -227,6 +229,9 @@ uv run -m cuktech_pc.firmware_unpack ../artifacts/firmware/njcuk.fitting.ad1204-
 
 # describe an AF07 command frame (does not construct or send a write)
 uv run -m cuktech_pc.firmware_commands "fe dc ba 01 f1 00 01 08 03 03 0f 0f"
+
+# disassemble 4 Thumb instructions at an address (base 0x403000)
+uv run --with capstone python tools/thumb_disasm.py FILE 4203b4 4
 
 # extract JavaScript modules from the Mi Home charger plugin's RAM bundle
 uv run -m cuktech_pc.ram_bundle PATH/TO/main.bundle --output NEW_DIRECTORY

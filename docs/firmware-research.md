@@ -128,8 +128,12 @@ uv run -m cuktech_pc.firmware forget-login
 - You do not need Bluetooth dependencies to download firmware.
 - The Linux binding CLI has more dependencies and a separate cache.
 
-Private desktop state is in `scripts/.private/xiaomi-session.dpapi`. Git
-ignores this file.
+The same commands work on Linux and macOS. There the session is in
+`~/.cuktech_pc/firmware-session.json` with mode 0600, not encrypted. See the
+[firmware how-to](firmware-howto.md).
+
+Private desktop state on Windows is in `scripts/.private/xiaomi-session.dpapi`.
+Git ignores this file.
 
 - It contains the validated session, selected account cookies and the charger
   token.

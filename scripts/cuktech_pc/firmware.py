@@ -1,7 +1,8 @@
 """Read-only AD1204U firmware download and offline inspection.
 
-Windows cloud credentials are stored through windows_private (DPAPI), never
-in a password file. This module contains no Bluetooth or flashing operations.
+The cloud session is stored by ``firmware_session``: DPAPI on Windows, a mode
+0600 file in ``~/.cuktech_pc`` on Linux and macOS. The password is never stored. This module contains no
+Bluetooth or flashing operations.
 Protocol sources and observed results: docs/firmware-research.md.
 Run: ``uv run -m cuktech_pc.firmware {login,fetch,inspect,status,forget-login}``.
 """
@@ -17,11 +18,19 @@ import sys
 import time
 from urllib.parse import urljoin, urlsplit
 
-from . import cloud, windows_private
+from . import cloud, firmware_session
 
 MODELS = {"njcuk.fitting.ad1204": 0x660E, "njcuk.fitting.1204e": 0x8AB9}
 MAGIC = bytes.fromhex("000000004d49ef54464f544182562647")
 DEFAULT_OUTPUT = Path(__file__).resolve().parents[2] / "artifacts" / "firmware"
+
+
+class UserError(ValueError):
+    """A problem that the user can fix. The message has no secrets, so the CLI prints it."""
+
+
+class ChargerNotOnAccount(UserError):
+    """No device on the account has the given MAC address."""
 
 
 def official_download_url(value: str) -> str:
@@ -137,7 +146,7 @@ def verify_package_signature(blob: bytes, info: dict) -> None:
 
 
 def cached_api(region: str | None = None):
-    """Make a cloud API client from the saved DPAPI session.
+    """Make a cloud API client from the saved session.
 
     Args:
         region: The expected cloud region, or ``None`` to use the saved one.
@@ -151,11 +160,11 @@ def cached_api(region: str | None = None):
             not the saved region.
     """
     cloud.assert_safe_env()
-    payload = windows_private.load()
-    if not payload or not all(payload.get(k) for k in ("user_id", "ssecurity", "service_token", "region", "charger")):
-        raise ValueError("no saved cloud session; run the login command")
+    payload = firmware_session.load()
+    if not payload or not all(payload.get(k) for k in ("user_id", "ssecurity", "service_token", "region")):
+        raise UserError("no saved cloud session; run the login command")
     if region and region != payload["region"]:
-        raise ValueError("the saved login uses a different region")
+        raise UserError("the saved login uses a different region")
     session = cloud.new_session()
     for cookie in payload.get("cookies", []):
         session.cookies.set(cookie["name"], cookie["value"], domain=cookie["domain"],
@@ -176,34 +185,39 @@ def find_charger(api, address: str) -> dict:
         The device dict from the cloud device list.
 
     Raises:
-        ValueError: If there is not exactly one match, or the match is not a
+        ChargerNotOnAccount: If no device has the MAC address.
+        UserError: If there is more than one match, or the match is not a
             supported model.
     """
     candidates = cloud._mac_candidates(address)
     hits = [d for d in api.list_devices() if cloud.normalize_mac(str(d.get("mac", ""))) in candidates]
+    if not hits:
+        raise ChargerNotOnAccount("the charger is not on this account and region")
     if len(hits) != 1 or hits[0].get("model") not in MODELS:
-        raise ValueError("expected one matching supported charger on this account and region")
+        raise UserError("expected one matching supported charger on this account and region")
     return hits[0]
 
 
 def login(args) -> None:
-    """Log in to the Xiaomi cloud and save the session and charger token.
+    """Log in to the Xiaomi cloud and save the session and, if found, the charger token.
 
     Asks for the password with ``getpass``. A captcha image goes to
-    ``DEFAULT_OUTPUT/captcha.png``. The password is not saved. The session,
-    cookies and charger token are saved with ``windows_private.save``.
+    ``DEFAULT_OUTPUT/captcha.png``. The password is not saved. The session and
+    cookies are saved with ``firmware_session.save``. If the charger is not on
+    the account (for example, the app removed it after the bind), the session
+    is still saved, and only ``fetch --legacy`` can work.
 
     Args:
         args: Parsed arguments with ``username``, ``address`` and ``region``.
 
     Raises:
-        ValueError: If the charger is not found or its token is not 24 hex digits.
+        ValueError: If the charger token has an unexpected format.
         cloud.CloudError: If the login or the captcha download fails.
     """
     cloud.assert_safe_env()
     username = args.username or input("Xiaomi account: ").strip()
     password = getpass.getpass("Password: ")
-    class WindowsAccount(cloud.MiAccount):
+    class CaptchaFileAccount(cloud.MiAccount):
         def _fetch_captcha(self, url):
             r = self._get(cloud.abs_account_url(url), stage="captcha fetch", headers=self._headers(),
                           max_bytes=cloud.MAX_CAPTCHA_BYTES)
@@ -217,28 +231,35 @@ def login(args) -> None:
             print(f"Captcha image: {path}")
             return input("Captcha characters: ").strip()
 
-    account = WindowsAccount(session=cloud.new_session(), hidden_input=getpass.getpass, diagnostic_mode=True)
+    account = CaptchaFileAccount(session=cloud.new_session(), hidden_input=getpass.getpass, diagnostic_mode=True)
     try:
         auth = account.login(username, password)
     finally:
         password = None
     api = cloud.MiCloudApi(account.session, auth, region=args.region, skew_seconds=account._skew_seconds)
-    device = find_charger(api, args.address)
-    token = str(device.get("token") or "").lower()
-    if not re.fullmatch("[0-9a-f]{24}", token):
-        raise ValueError("charger token has an unexpected format")
+    try:
+        device = find_charger(api, args.address)
+    except ChargerNotOnAccount:
+        device = None
+        print("The charger is not on this account. Only 'fetch --legacy' (raw image by model) can work.")
+    charger = {}
+    if device is not None:
+        token = str(device.get("token") or "").lower()
+        if not re.fullmatch("[0-9a-f]{24}", token):
+            raise ValueError("charger token has an unexpected format")
+        charger = {"address": str(device["mac"]), "model": str(device["model"]),
+                   "did": str(device["did"]), "token_hex": token}
     payload = {"schema": 1, "saved_at": time.time(), "region": args.region,
                "username_tag": hashlib.sha256(username.strip().lower().encode()).hexdigest(),
                "user_id": auth.user_id, "service_token": auth.service_token, "ssecurity": auth.ssecurity,
                "device_id": account.device_id, "agent": account.agent, "skew_seconds": account._skew_seconds,
-               "charger": {"address": str(device["mac"]), "model": str(device["model"]),
-                           "did": str(device["did"]), "token_hex": token},
+               "charger": charger,
                "cookies": [{"name": c.name, "value": c.value, "domain": c.domain, "path": c.path,
                             "secure": c.secure, "expires": c.expires}
                            for c in account.session.cookies if c.name in
                            {"userId", "cUserId", "serviceToken", "yetAnotherServiceToken", "deviceId", "sdkVersion", "passToken"}]}
-    windows_private.save(payload)
-    print("Saved encrypted cloud session and charger token. No password was saved.")
+    firmware_session.save(payload)
+    print(f"Saved the cloud session to {firmware_session.location()}. No password was saved.")
 
 
 def fetch(args) -> None:
@@ -251,16 +272,27 @@ def fetch(args) -> None:
     ``.json`` metadata file. It does not install the firmware.
 
     Args:
-        args: Parsed arguments with ``address``, ``region``, ``legacy`` and
-            ``output``.
+        args: Parsed arguments with ``address``, ``region``, ``legacy``,
+            ``model`` and ``output``.
 
     Raises:
         ValueError: If a metadata, URL, size, checksum or signature check
-            fails, or the destination is a symlink or a different file.
+            fails, the destination is a symlink or a different file, or the
+            signed package is asked for but the charger is not on the account.
     """
     api, saved = cached_api(args.region)
-    address = args.address or saved["charger"]["address"]
-    device = find_charger(api, address)  # Validate the saved login and current account ownership.
+    address = args.address or (saved.get("charger") or {}).get("address")
+    device = None
+    if address:
+        try:
+            device = find_charger(api, address)  # Validate the saved login and current account ownership.
+        except ChargerNotOnAccount:
+            if not args.legacy:
+                raise
+    if device is None:
+        if not args.legacy:
+            raise UserError("the signed package needs the charger on this account; use --legacy for the raw image")
+        device = {"model": getattr(args, "model", None) or "njcuk.fitting.ad1204"}
     path, body = (("/home/latest_version", {"model": device["model"]}) if args.legacy
                   else ("/v2/device/latest_ver", {"did": str(device["did"])}))
     response = api.encrypted_post(path, json.dumps(body, separators=(",", ":")))
@@ -325,7 +357,7 @@ def main() -> int:
     """
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    p = commands.add_parser("login", help="save a Windows-user-encrypted cloud session")
+    p = commands.add_parser("login", help="sign in and save the cloud session (DPAPI on Windows, mode 0600 file elsewhere)")
     p.add_argument("--username", default="")
     p.add_argument("--address", required=True)
     p.add_argument("--region", choices=cloud.SERVERS, default="cn")
@@ -333,11 +365,13 @@ def main() -> int:
     p.add_argument("--address")
     p.add_argument("--region", choices=cloud.SERVERS)
     p.add_argument("--legacy", action="store_true", help="inspect the legacy raw image instead of the signed package")
+    p.add_argument("--model", choices=sorted(MODELS), default="njcuk.fitting.ad1204",
+                   help="model for --legacy when the charger is not on the account (else the charger's own model is used)")
     p.add_argument("--output", default=str(DEFAULT_OUTPUT))
     p = commands.add_parser("inspect", help="inspect a downloaded file offline")
     p.add_argument("file", type=Path)
     commands.add_parser("status", help="show if private session/token material exists (not its values)")
-    commands.add_parser("forget-login", help="remove cloud credentials and keep the encrypted charger token")
+    commands.add_parser("forget-login", help="remove cloud credentials and keep the charger token")
     args = parser.parse_args()
     try:
         if args.command == "login": login(args)
@@ -349,18 +383,21 @@ def main() -> int:
                 info["developer_and_image_signature_verified"] = True
             print(json.dumps(info, indent=2))
         elif args.command == "status":
-            p = windows_private.load() or {}
+            p = firmware_session.load() or {}
             print(json.dumps({"cloud_session_saved": bool(p.get("service_token")),
                               "charger_token_saved": bool(p.get("charger", {}).get("token_hex")),
                               "region": p.get("region")}))
         elif args.command == "forget-login":
-            p = windows_private.load()
+            p = firmware_session.load()
             if p:
-                windows_private.save({"schema": 1, "region": p.get("region"), "charger": p.get("charger", {})})
-            print("Cloud login forgotten; the encrypted charger token was kept.")
+                firmware_session.save({"schema": 1, "region": p.get("region"), "charger": p.get("charger", {})})
+            print("Cloud login forgotten; the charger token was kept.")
         return 0
     except KeyboardInterrupt:
         print("Cancelled.", file=sys.stderr)
+        return 1
+    except (UserError, firmware_session.SessionStoreError) as exc:
+        print(f"Firmware operation failed: {exc}. No charger settings were changed.", file=sys.stderr)
         return 1
     except Exception as exc:
         # Exceptions from HTTP libraries can contain URLs and credential-bearing queries.

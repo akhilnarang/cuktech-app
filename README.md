@@ -15,7 +15,7 @@ is complete, the charger can become unusable (bricked).
 |---|---|
 | [`app/`](app) | Android app (Kotlin + Compose). Setup, then an offline dashboard. |
 | [`scripts/`](scripts) | Python CLI (`cuktech_pc`): the same setup from a PC, plus firmware tools. |
-| [`docs/`](docs) | Notes about the protocol and the firmware, from reverse engineering ([index](docs/README.md)). |
+| [`docs/`](docs) | Notes about the protocol and the firmware, from reverse engineering ([index](docs/README.md), [how-to](docs/firmware-howto.md)). |
 
 ## Why you need a Xiaomi account
 

@@ -26,6 +26,8 @@ record hashes, so that you can reproduce the results with the same inputs.
 
 ## Overview
 
+- [Firmware how-to](firmware-howto.md): download, check, disassemble, decompile and compare firmware, step by step. Start here.
+
 - [Capability inventory](charger-capabilities.md): the functions of the charger, the functions that the app implements, and the items that need a hardware check.
 - [Staged analysis log](firmware-analysis-log.md): a record of each analysis stage and its evidence, in time order.
 - [Analysis boundaries and recovery](firmware-boundaries-and-recovery.md): the limits of static analysis, and the conditions to meet before a write or a recovery attempt.

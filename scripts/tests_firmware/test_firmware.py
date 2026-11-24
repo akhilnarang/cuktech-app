@@ -2,16 +2,23 @@
 import hashlib
 import io
 import os
-from pathlib import Path
 import tempfile
-from types import SimpleNamespace
 import unittest
+from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
-from cryptography.exceptions import InvalidSignature
 import requests
+from cryptography.exceptions import InvalidSignature
 
-from cuktech_pc.firmware import fetch, inspect_image, official_download_url, verify_package_signature
+from cuktech_pc import firmware_session
+from cuktech_pc.firmware import (
+    UserError,
+    fetch,
+    inspect_image,
+    official_download_url,
+    verify_package_signature,
+)
 from tests_firmware.fixtures import image, raw_image, signed_package
 
 MODEL_TLV = b"\x04\x14njcuk.fitting.ad1204"
@@ -161,6 +168,74 @@ class FetchTests(unittest.TestCase):
                     self.assertEqual(outside.read_bytes(), b"keep")
                 else:
                     self.assertFalse(target.exists())
+
+    def test_charger_not_on_account(self):
+        # The app removes the charger from the account after the bind. The raw image is offered by model;
+        # the signed package needs the device ID, so it must be refused, not fetched for a guessed device.
+        class NoChargerApi(FakeAccountApi):
+            def __init__(self, offer):
+                super().__init__(offer)
+                self.posts = []
+
+            def list_devices(self):
+                return []
+
+            def encrypted_post(self, path, body):
+                self.posts.append((path, body))
+                return super().encrypted_post(path, body)
+
+        raw = raw_image()
+        offer = {"version": "2.1.2_0079", "md5": hashlib.md5(raw).hexdigest(), "safe_url": CDN}
+        for legacy in (True, False):
+            with self.subTest(legacy=legacy), tempfile.TemporaryDirectory() as temp:
+                api, out = NoChargerApi(offer), Path(temp) / "out"
+                args = SimpleNamespace(address=None, region=None, legacy=legacy, model="njcuk.fitting.ad1204", output=str(out))
+                send = lambda adapter, request, **kwargs: http_response(request, 200, raw)
+                with (patch("cuktech_pc.firmware.cached_api", return_value=(api, {"charger": {}})),
+                      patch("requests.adapters.HTTPAdapter.send", send), patch("builtins.print")):
+                    if legacy:
+                        fetch(args)
+                        self.assertEqual(api.posts, [("/home/latest_version", '{"model":"njcuk.fitting.ad1204"}')])
+                        self.assertEqual((out / "njcuk.fitting.ad1204-2.1.2_0079-raw.bin").read_bytes(), raw)
+                    else:
+                        with self.assertRaisesRegex(UserError, "--legacy"):
+                            fetch(args)
+                        self.assertEqual(api.posts, [])
+
+    def test_ambiguous_charger_is_not_treated_as_missing(self):
+        # Only "no device with this MAC" may fall back to the model; two matches must stop the fetch.
+        class TwoMatchesApi(FakeAccountApi):
+            def list_devices(self):
+                return [DEVICE, dict(DEVICE, did="blt.1.other")]
+
+        args = SimpleNamespace(address=DEVICE["mac"], region=None, legacy=True, model="njcuk.fitting.ad1204", output="unused")
+        with (patch("cuktech_pc.firmware.cached_api", return_value=(TwoMatchesApi({}), {"charger": {}})),
+              patch("builtins.print"), self.assertRaisesRegex(UserError, "expected one matching")):
+            fetch(args)
+
+
+@unittest.skipIf(os.name == "nt", "Windows stores the session with DPAPI")
+class SessionStoreTests(unittest.TestCase):
+    def test_round_trip_is_private(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "session.json"
+            firmware_session.save({"schema": 1, "service_token": "secret"}, path)
+            self.assertEqual(path.stat().st_mode & 0o777, 0o600)
+            self.assertEqual(firmware_session.load(path), {"schema": 1, "service_token": "secret"})
+
+    def test_refuses_unsafe_files(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path, target = Path(temp) / "session.json", Path(temp) / "elsewhere.json"
+            target.write_text('{"schema": 1}')
+            os.chmod(target, 0o600)
+            path.symlink_to(target)
+            with self.assertRaisesRegex(firmware_session.SessionStoreError, "symlink"):
+                firmware_session.load(path)
+            path.unlink()
+            path.write_text('{"schema": 1}')
+            os.chmod(path, 0o644)
+            with self.assertRaisesRegex(firmware_session.SessionStoreError, "0600"):
+                firmware_session.load(path)
 
 
 if __name__ == "__main__":

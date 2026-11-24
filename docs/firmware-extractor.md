@@ -64,7 +64,14 @@ transparency or clipping. See [the research record](firmware/controller-and-asse
 ## Decompiler output
 
 To make decompiler pseudocode and a Ghidra project in the same run, use the
-existing workflow from the repository root:
+existing workflow from the repository root. On Linux/macOS:
+
+```bash
+scripts/ghidra/analyze-firmware.sh artifacts/firmware/njcuk.fitting.ad1204-2.1.2_0073-signed.bin \
+    artifacts/firmware/my-extracted-and-decompiled-0073 /path/to/ghidra --assets --split-unclassified --verify
+```
+
+On Windows:
 
 ```powershell
 scripts/ghidra/analyze-firmware.ps1 `
